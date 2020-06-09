@@ -9,10 +9,10 @@ const Container = styled.View`
   padding-left: 20px;
 `;
 
-const BackBtn: React.FC = () => {
+const BackBtn: React.FC = () => (
   <Container>
     <Ionicons name={isAndroid ? "md-arrow-down" : "ios-arrow-down"} size={28} />
-  </Container>;
-};
+  </Container>
+);
 
 export default BackBtn;
