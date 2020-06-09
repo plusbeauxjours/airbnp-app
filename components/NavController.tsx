@@ -4,11 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Auth from "../navigations/Auth";
 
 const Text = styled.Text``;
-const View = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+
 const Touchabele = styled.TouchableOpacity``;
 
 export default () => {

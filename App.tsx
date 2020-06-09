@@ -6,10 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { ThemeProvider } from "styled-components";
 
 import NavController from "./components/NavController";
-import theme from "./styles/theme";
 import store, { persistor } from "./redux/store";
 
 const cacheImages = (images: any) =>
@@ -38,13 +36,11 @@ export default function App() {
     return Promise.all([...imagePromises, ...fontPromises]);
   };
   return isReady ? (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <NavController />
-        </PersistGate>
-      </Provider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <NavController />
+      </PersistGate>
+    </Provider>
   ) : (
     <AppLoading
       onError={console.error}

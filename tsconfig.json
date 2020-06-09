@@ -22,9 +22,5 @@
     "noUnusedLocals": true,
     "esModuleInterop": true
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts"
-  ]
+  "exclude": ["node_modules", "build", "scripts"]
 }
