@@ -1,28 +1,55 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import Welcome from "./screens/Welcome";
-import SignIn from "./screens/SignIn";
-import SignUp from "./screens/SignUp";
-const Auth = createStackNavigator();
+import React, { useState } from "react";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "react-native";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { ThemeProvider } from "styled-components";
+
+import NavController from "./components/NavController";
+import theme from "./styles/theme";
+import store, { persistor } from "./redux/store";
+
+const cacheImages = (images: any) =>
+  images.map((image: any) => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+
+const cacheFonts = (fonts: any) =>
+  fonts.map((font: any) => Font.loadAsync(font));
+
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Auth.Navigator>
-        <Auth.Screen name="Welcome" component={Welcome} />
-        <Auth.Screen name="SignUp" component={SignUp} />
-        <Auth.Screen name="SignIn" component={SignIn} />
-      </Auth.Navigator>
-    </NavigationContainer>
+  const [isReady, setIsReady] = useState(false);
+  const handleFinish = () => setIsReady(true);
+  const loadAssets = async () => {
+    const images = [
+      require("./assets/loginBg.jpeg"),
+      "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png",
+    ];
+    const fonts = [Ionicons.font];
+    const imagePromises = cacheImages(images);
+    const fontPromises = cacheFonts(fonts);
+    return Promise.all([...imagePromises, ...fontPromises]);
+  };
+  return isReady ? (
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <NavController />
+        </PersistGate>
+      </Provider>
+    </ThemeProvider>
+  ) : (
+    <AppLoading
+      onError={console.error}
+      onFinish={handleFinish}
+      startAsync={loadAssets}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
