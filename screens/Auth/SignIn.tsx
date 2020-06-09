@@ -19,7 +19,6 @@ const SignIn: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const handleSubmit = () => alert(`${username}, ${password}`);
-  const dismissKeyboard = () => Keyboard.dismiss();
   return (
     <DismissKeyboard>
       <Container>
