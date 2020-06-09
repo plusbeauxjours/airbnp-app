@@ -17,6 +17,7 @@ interface IProps {
   isPassword?: boolean;
   autoCapitalize?: "none" | "sentences" | "words" | "characters";
   stateFn: (text: string) => void;
+  keyboardType?: KeyboardTypeOptions;
 }
 
 const Input: React.FC<IProps> = ({
@@ -25,8 +26,10 @@ const Input: React.FC<IProps> = ({
   isPassword = false,
   autoCapitalize,
   stateFn,
+  keyboardType,
 }) => (
   <Container
+    keyboardType={keyboardType}
     value={value}
     placeholder={placeholder}
     secureTextEntry={isPassword ? true : false}

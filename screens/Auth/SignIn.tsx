@@ -15,9 +15,9 @@ const InputContainer = styled.View`
   margin-bottom: 30px;
 `;
 
-const SignIn: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+export default ({ route: { params } }) => {
+  const [username, setUsername] = useState<string>(params?.email);
+  const [password, setPassword] = useState<string>(params?.password);
   const handleSubmit = () => alert(`${username}, ${password}`);
   return (
     <DismissKeyboard>
@@ -45,5 +45,3 @@ const SignIn: React.FC = () => {
     </DismissKeyboard>
   );
 };
-
-export default SignIn;

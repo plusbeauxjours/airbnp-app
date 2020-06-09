@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import { ActivityIndicator } from "react-native";
 import colors from "../../colors";
 
 const Button = styled.View<ITheme>`
@@ -24,6 +25,7 @@ const Text = styled.Text<ITheme>`
 const Touchable = styled.TouchableOpacity``;
 
 interface IProps {
+  loading?: boolean;
   onPress: () => void;
   text: string;
   color?: string;
@@ -35,12 +37,22 @@ interface ITheme {
   color?: string;
 }
 
-const Btn: React.FC<IProps> = ({ onPress, text, accent = false, color }) => (
-  <Touchable onPress={onPress}>
+const Btn: React.FC<IProps> = ({
+  loading,
+  onPress,
+  text,
+  accent = false,
+  color,
+}) => (
+  <Touchable disabled={loading} onPress={onPress}>
     <Button accent={accent} color={color}>
-      <Text accent={accent} color={color}>
-        {text}
-      </Text>
+      {loading ? (
+        <ActivityIndicator color={accent ? "white" : "black"} />
+      ) : (
+        <Text accent={accent} color={color}>
+          {text}
+        </Text>
+      )}
     </Button>
   </Touchable>
 );
