@@ -5,7 +5,7 @@ import Saved from "../screens/Main/Saved";
 import MapScreen from "../screens/Main/Map";
 import Profile from "../screens/Main/Profile";
 import colors from "../colors";
-import utils from "utils";
+import utils from "../utils";
 import { Ionicons } from "@expo/vector-icons";
 
 const Main = createBottomTabNavigator();

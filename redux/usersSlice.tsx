@@ -7,7 +7,7 @@ interface IState {
 }
 const initialState: IState = { isLoggedIn: true, token: null };
 
-const userSlice = createSlice({
+const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
@@ -22,7 +22,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { logIn, logOut } = userSlice.actions;
+export const { logIn, logOut } = usersSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
   try {
@@ -37,4 +37,4 @@ export const userLogin = (form) => async (dispatch) => {
   }
 };
 
-export default userSlice.reducer;
+export default usersSlice.reducer;
