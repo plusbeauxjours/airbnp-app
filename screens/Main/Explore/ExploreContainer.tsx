@@ -1,10 +1,17 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../../redux/usersSlice";
-
+import React, { useEffect } from "react";
 import ExplorePresenter from "./ExplorePresenter";
 
-export default () => {
-  const dispatch = useDispatch();
-  return <ExplorePresenter dispatch={dispatch} logOut={logOut} />;
+interface IProps {
+  getRooms: any;
+  rooms: any;
+  page: number;
+}
+
+const ExploreContainer: React.FC<IProps> = ({ getRooms, rooms, page }) => {
+  useEffect(() => {
+    getRooms();
+  }, []);
+  return <ExplorePresenter getRooms={getRooms} rooms={rooms} page={page} />;
 };
+
+export default ExploreContainer;

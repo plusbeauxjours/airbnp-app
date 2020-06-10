@@ -3,7 +3,7 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import { Image } from "react-native";
+import { Image, AsyncStorage } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
@@ -26,6 +26,7 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
   const handleFinish = () => setIsReady(true);
   const loadAssets = async () => {
+    await AsyncStorage.clear();
     const images = [
       require("./assets/loginBg.jpeg"),
       "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png",

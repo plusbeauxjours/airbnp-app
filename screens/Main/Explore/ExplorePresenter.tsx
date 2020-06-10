@@ -1,26 +1,25 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Dispatch } from "redux";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 const View = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
 `;
-const Touchable = styled.TouchableOpacity``;
 const Text = styled.Text``;
 
 interface IProps {
-  dispatch: Dispatch;
-  logOut: ActionCreatorWithPayload<any, string>;
+  getRooms: () => (dispatch: any) => Promise<void>;
+  rooms: any;
+  page: number;
 }
 
-const ExplorePresenter: React.FC<IProps> = ({ dispatch, logOut }) => (
+const ExplorePresenter: React.FC<IProps> = ({ getRooms, rooms, page }) => (
   <View>
-    <Touchable onPress={() => dispatch(logOut())}>
-      <Text>Explore</Text>
-    </Touchable>
+    <Text>Explore</Text>
+    {rooms.map((room) => (
+      <Text>{room.uuid}</Text>
+    ))}
   </View>
 );
 
