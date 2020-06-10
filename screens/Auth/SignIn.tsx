@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+
 import Btn from "../../components/Auth/Btn";
 import Input from "../../components/Auth/Input";
 import { StatusBar, KeyboardAvoidingView } from "react-native";
 import DismissKeyboard from "../../components/DismissKeyboard";
 import { useDispatch } from "react-redux";
-import { isEmail } from "../../utils";
+import utils from "../../utils";
 import { userLogin } from "../../redux/usersSlice";
 
 const Container = styled.View`
@@ -27,7 +28,7 @@ export default ({ route: { params } }) => {
       alert("All fields are required.");
       return false;
     }
-    if (!isEmail(email)) {
+    if (!utils.isEmail(email)) {
       alert("Email is invalid");
       return false;
     }
