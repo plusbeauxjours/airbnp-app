@@ -38,7 +38,7 @@ interface ITheme {
 }
 
 const Btn: React.FC<IProps> = ({
-  loading,
+  loading = false,
   onPress,
   text,
   accent = false,

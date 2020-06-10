@@ -5,7 +5,7 @@ import Btn from "../../components/Auth/Btn";
 import Input from "../../components/Auth/Input";
 import DismissKeyboard from "../../components/DismissKeyboard";
 import { isEmail } from "../../utils";
-import { createAccount } from "../../api";
+import api from "../../api";
 
 const Container = styled.View`
   flex: 1;
@@ -44,7 +44,7 @@ export default ({ navigation }) => {
     }
     setLoading(true);
     try {
-      const { status } = await createAccount({
+      const { status } = await api.createAccount({
         first_name: firstName,
         last_name: lastName,
         email,
@@ -83,7 +83,6 @@ export default ({ navigation }) => {
               keyboardType={"email-address"}
               value={email}
               placeholder="Email"
-              ke
               autoCapitalize="none"
               stateFn={setEmail}
             />
