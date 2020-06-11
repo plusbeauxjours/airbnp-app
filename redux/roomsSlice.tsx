@@ -18,14 +18,7 @@ const roomsSlice = createSlice({
         explore.rooms = payload.rooms;
         explore.page = 1;
       } else {
-        payload.rooms.forEach((payloadRoom) => {
-          const exists = explore.rooms.find(
-            (savedRoom) => savedRoom.uuid === payloadRoom.uuid
-          );
-          if (!exists) {
-            explore.rooms.push(payloadRoom);
-          }
-        });
+        explore.rooms = [...explore.rooms, ...payload.rooms];
       }
     },
     increasePage(state, action) {

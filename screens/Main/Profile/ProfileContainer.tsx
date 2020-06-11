@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProfilePresenter from "./ProfilePresenter";
 
-export default () => {
+interface IProps {
+  getMe: () => void;
+  me: any;
+}
+
+const ProfileContainer: React.FC<IProps> = ({ getMe, me }) => {
+  useEffect(() => {
+    getMe();
+  }, []);
   return <ProfilePresenter />;
 };
+
+export default ProfileContainer;
