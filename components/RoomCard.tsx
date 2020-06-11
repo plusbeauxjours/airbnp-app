@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
-import Swiper from "react-native-swiper";
+import Swiper from "react-native-web-swiper";
 
-const { width, height } = Dimensions.get("screen");
+const { height } = Dimensions.get("screen");
 
+const View = styled.View``;
 const Container = styled.View`
   width: 100%;
   margin-bottom: 25px;
@@ -82,17 +83,18 @@ const RoomCard: React.FC<IProps> = ({
         />
       ) : (
         <Swiper
-          removeClippedSubviews
-          paginationStyle={{ marginBottom: -15 }}
-          dotColor={"rgba(200, 200, 200, 0.8)"}
-          activeDotColor={"white"}
+          controlsProps={{
+            prevPos: false,
+            nextPos: false,
+            dotActiveStyle: {
+              backgroundColor: "white",
+            },
+          }}
         >
           {photos.map((photo) => (
-            <SlideImage
-              key={photo.id}
-              resizeMode="cover"
-              source={{ uri: photo.file }}
-            />
+            <View key={photo.id}>
+              <SlideImage source={{ uri: photo.file }} />
+            </View>
           ))}
         </Swiper>
       )}

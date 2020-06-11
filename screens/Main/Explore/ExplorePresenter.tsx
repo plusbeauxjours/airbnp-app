@@ -31,9 +31,10 @@ const Touchable = styled.TouchableOpacity``;
 
 interface IProps {
   rooms: any;
+  increasePage: () => void;
 }
 
-const ExplorePresenter: React.FC<IProps> = ({ rooms }) => (
+const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => (
   <Container>
     {rooms.length === 0 ? (
       <ActivityIndicator color="black" />
@@ -58,7 +59,7 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms }) => (
               isSuperHost={room.user.superhost}
             />
           ))}
-          <Touchable>
+          <Touchable onPress={increasePage}>
             <Text>Load More</Text>
           </Touchable>
         </ScrollView>
