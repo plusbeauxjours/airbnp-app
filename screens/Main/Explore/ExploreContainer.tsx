@@ -10,8 +10,9 @@ interface IProps {
 const ExploreContainer: React.FC<IProps> = ({ getRooms, rooms, page }) => {
   useEffect(() => {
     getRooms();
+    console.log(rooms);
   }, []);
-  return <ExplorePresenter getRooms={getRooms} rooms={rooms} page={page} />;
+  return <ExplorePresenter rooms={rooms} />;
 };
 
 export default ExploreContainer;

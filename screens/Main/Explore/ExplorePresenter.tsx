@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
+import RoomCard from "../../../components/RoomCard";
+import { ActivityIndicator, ScrollView } from "react-native";
 
 const View = styled.View`
   flex: 1;
@@ -9,17 +11,31 @@ const View = styled.View`
 const Text = styled.Text``;
 
 interface IProps {
-  getRooms: () => (dispatch: any) => Promise<void>;
   rooms: any;
-  page: number;
 }
 
-const ExplorePresenter: React.FC<IProps> = ({ getRooms, rooms, page }) => (
+const ExplorePresenter: React.FC<IProps> = ({ rooms }) => (
   <View>
-    <Text>Explore</Text>
-    {rooms.map((room) => (
-      <Text>{room.uuid}</Text>
-    ))}
+    {rooms.length === 0 ? (
+      <ActivityIndicator color="black" />
+    ) : (
+      <ScrollView
+        style={{ width: "100%", marginTop: 120 }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+      >
+        {rooms.map((room) => (
+          <RoomCard
+            key={room.id}
+            name={room.name}
+            price={room.price}
+            photos={room.photos}
+            uuid={room.uuid}
+            isFav={room.is_fav}
+            isSuperHost={room.user.superhost}
+          />
+        ))}
+      </ScrollView>
+    )}
   </View>
 );
 
