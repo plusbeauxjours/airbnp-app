@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import api from "../api";
+import { setFavs, setFav } from "./roomsSlice";
 
 const usersSlice = createSlice({
   name: "users",
@@ -56,26 +57,52 @@ export const userLogin = (form) => async (dispatch) => {
     alert("Wrong user/password");
   }
 };
+
+export const getMe = () => async (dispatch, getState) => {
+  const {
+    usersReducer: { uuid },
+  } = getState();
+  try {
+    const { data } = await api.user(uuid);
+    dispatch(setMe({ data }));
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
 export const getFavs = () => async (dispatch, getState) => {
   const {
     usersReducer: { uuid },
   } = getState();
   try {
     const { data } = await api.favs(uuid);
+    dispatch(setFavs(data));
   } catch (e) {
     console.warn(e);
   }
 };
-// export const getUser = (uuid: string) => async (dispatch) => {
+
+export const toggleFavs = (roomUuid) => async (dispatch, getState) => {
+  const {
+    usersReducer: { uuid, token },
+  } = getState();
+  dispatch(setFav({ roomUuid }));
+  try {
+    console.log(uuid, roomUuid, token);
+    const { status } = await api.toggleFavs(uuid, roomUuid, token);
+    console.log(status);
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+// export const getUser = (uuid: string) => async (dispatch, getState) => {
+//   const {
+//     usersReducer: { uuid },
+//   } = getState();
 //   try {
-//     const {
-//       data: { results },
-//     } = await api.user(uuid);
-//     dispatch(
-//       setUser({
-//         results,
-//       })
-//     );
+//     const { data } = await api.user(uuid);
+//     dispatch(setMe({ data }));
 //   } catch (e) {
 //     console.warn(e);
 //   }

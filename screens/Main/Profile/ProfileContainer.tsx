@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProfilePresenter from "./ProfilePresenter";
 
 interface IProps {
@@ -9,6 +9,7 @@ interface IProps {
   email: string;
   avatar: string;
   superuser: boolean;
+  getMe: () => void;
 }
 
 const ProfileContainer: React.FC<IProps> = ({
@@ -19,7 +20,11 @@ const ProfileContainer: React.FC<IProps> = ({
   email,
   avatar,
   superuser,
+  getMe,
 }) => {
+  useEffect(() => {
+    getMe();
+  }, []);
   return (
     <ProfilePresenter
       uuid={uuid}
