@@ -18,6 +18,7 @@ export default {
     createAccount: (form: any) => callApi("post", "/users/", form),
     login: (form: any) => callApi("post", "/users/login/", form),
     rooms: (page: number = 1) => callApi("get", `/rooms/?page=${page}`),
+    favs: (uuid: string) => callApi("get", `/users/${uuid}/favs/`),
     user: (uuid: string) => callApi("get", `/users/${uuid}/`)
 }
 

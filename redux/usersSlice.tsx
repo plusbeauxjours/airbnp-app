@@ -8,11 +8,13 @@ const usersSlice = createSlice({
     token: null,
     me: null,
     users: [],
+    uuid: null,
   },
   reducers: {
     logIn(state, action) {
       state.isLoggedIn = true;
       state.token = action.payload.token;
+      state.uuid = action.payload.uuid;
     },
     logOut(state, action) {
       state.isLoggedIn = false;
@@ -44,7 +46,7 @@ export const userLogin = (form) => async (dispatch) => {
       data: { uuid, token },
     } = await api.login(form);
     if (uuid && token) {
-      dispatch(logIn({ token }));
+      dispatch(logIn({ uuid, token }));
       const { data } = await api.user(uuid);
       if (data) {
         dispatch(setMe({ data }));
@@ -52,6 +54,16 @@ export const userLogin = (form) => async (dispatch) => {
     }
   } catch (e) {
     alert("Wrong user/password");
+  }
+};
+export const getFavs = () => async (dispatch, getState) => {
+  const {
+    usersReducer: { uuid },
+  } = getState();
+  try {
+    const { data } = await api.favs(uuid);
+  } catch (e) {
+    console.warn(e);
   }
 };
 // export const getUser = (uuid: string) => async (dispatch) => {
