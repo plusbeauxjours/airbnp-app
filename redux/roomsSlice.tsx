@@ -29,7 +29,7 @@ const roomsSlice = createSlice({
 
 export const { setExploreRooms, increasePage } = roomsSlice.actions;
 
-export const getRooms = (page) => async (dispatch) => {
+export const getRooms = (page: number) => async (dispatch) => {
   try {
     const {
       data: { results },
