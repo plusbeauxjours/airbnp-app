@@ -51,11 +51,14 @@ export const {
   setFav,
 } = roomsSlice.actions;
 
-export const getRooms = (page: number) => async (dispatch) => {
+export const getRooms = (page: number) => async (dispatch, getState) => {
+  const {
+    usersReducer: { token },
+  } = getState();
   try {
     const {
       data: { results },
-    } = await api.rooms(page);
+    } = await api.rooms(page, token);
     dispatch(
       setExploreRooms({
         rooms: results,

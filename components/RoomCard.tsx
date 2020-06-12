@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import utils from "../utils";
 import { useDispatch } from "react-redux";
 import { toggleFavs } from "../redux/usersSlice";
+import colors from "../colors";
 
 const { height } = Dimensions.get("screen");
 
@@ -64,9 +65,9 @@ const SlideImage = styled.Image`
 
 const FavButton = styled.View`
   background-color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
   justify-content: center;
   align-items: center;
   padding-top: 5px;
@@ -88,6 +89,21 @@ interface IProps {
   price: number;
 }
 
+function getIconName(isFav) {
+  const isAndroid = utils.isAndroid();
+  if (isAndroid) {
+    if (isFav) {
+      return "md-heart";
+    }
+    return "md-heart-empty";
+  } else {
+    if (isFav) {
+      return "ios-heart";
+    }
+    return "ios-heart-empty";
+  }
+}
+
 const RoomCard: React.FC<IProps> = ({
   uuid,
   isFav,
@@ -103,7 +119,8 @@ const RoomCard: React.FC<IProps> = ({
         <FavButton>
           <Ionicons
             size={25}
-            name={utils.isAndroid() ? "md-heart-empty" : "ios-heart-empty"}
+            color={isFav ? colors.red : "black"}
+            name={getIconName(isFav)}
           />
         </FavButton>
       </Touchable>

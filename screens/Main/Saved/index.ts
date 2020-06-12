@@ -8,4 +8,8 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(SavedContainer)
+function mapStateToProps(state) {
+    return { rooms: state.roomsReducer.favs }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SavedContainer)

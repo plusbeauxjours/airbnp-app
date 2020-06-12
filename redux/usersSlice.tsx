@@ -72,10 +72,10 @@ export const getMe = () => async (dispatch, getState) => {
 
 export const getFavs = () => async (dispatch, getState) => {
   const {
-    usersReducer: { uuid },
+    usersReducer: { uuid, token },
   } = getState();
   try {
-    const { data } = await api.favs(uuid);
+    const { data } = await api.favs(uuid, token);
     dispatch(setFavs(data));
   } catch (e) {
     console.warn(e);
