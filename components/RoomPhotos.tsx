@@ -5,11 +5,12 @@ import { Dimensions } from "react-native";
 
 const { height } = Dimensions.get("screen");
 
-const PhotoContainer = styled.View`
+const PhotoContainer = styled.View<ITheme>`
   margin-bottom: 10px;
   overflow: hidden;
   width: 100%;
   height: ${height / 4}px;
+  height: ${(props) => `${height / props.factor}`}px;
   border-radius: 4px;
 `;
 
@@ -18,16 +19,17 @@ const SlideImage = styled.Image`
   height: 100%;
 `;
 
-interface IPhotos {
-  uuid: string;
-  file: string;
-}
-interface IProps {
-  photos: IPhotos[];
+interface ITheme {
+  factor: number;
 }
 
-const RoomPhotos: React.FC<IProps> = ({ photos }) => (
-  <PhotoContainer>
+interface IProps {
+  photos: any;
+  factor?: number;
+}
+
+const RoomPhotos: React.FC<IProps> = ({ photos, factor = 4 }) => (
+  <PhotoContainer factor={factor}>
     {photos.length === 0 ? (
       <SlideImage
         resizeMode="repeat"
@@ -43,8 +45,8 @@ const RoomPhotos: React.FC<IProps> = ({ photos }) => (
           },
         }}
       >
-        {photos.map((photo) => (
-          <SlideImage key={photo.uuid} source={{ uri: photo.file }} />
+        {photos.map((photo, index) => (
+          <SlideImage key={index} source={{ uri: photo.file }} />
         ))}
       </Swiper>
     )}

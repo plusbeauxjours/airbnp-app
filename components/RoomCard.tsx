@@ -76,7 +76,7 @@ interface IProps {
   uuid: string;
   isFav: boolean;
   isSuperHost: boolean;
-  photos: any;
+  photos: {};
   name: string;
   price: number;
   roomObj: {};

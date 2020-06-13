@@ -10,11 +10,9 @@ const Container = styled.View`
 const ScrollView = styled.ScrollView``;
 
 const Title = styled.Text`
-  font-size: 36px;
+  font-size: 30px;
   margin-bottom: 10px;
 `;
-
-const Text = styled.Text``;
 
 const NoFavs = styled.Text``;
 
