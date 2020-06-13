@@ -72,6 +72,7 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => (
               uuid={room.uuid}
               isFav={room.is_fav}
               isSuperHost={room.user.superhost}
+              roomObj={room}
             />
           ))}
           <Touchable onPress={increasePage}>

@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { StatusBar } from "react-native";
 import { BlurView } from "expo-blur";
 import Btn from "../../components/Auth/Btn";
+import { useNavigation } from "@react-navigation/native";
 
 const LOGO_URL =
   "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png";
@@ -23,7 +24,8 @@ const BtnContainer = styled.View`
   margin-top: 40px;
 `;
 
-export default ({ navigation }) => {
+export default () => {
+  const navigation = useNavigation();
   const goToSignUp = () => navigation.navigate("SignUp");
   const goToSignIn = () => navigation.navigate("SignIn");
   return (

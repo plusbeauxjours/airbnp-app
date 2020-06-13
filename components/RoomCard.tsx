@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Dimensions } from "react-native";
-import Swiper from "react-native-web-swiper";
 import { Ionicons } from "@expo/vector-icons";
 import utils from "../utils";
 import { useDispatch } from "react-redux";
 import { toggleFavs } from "../redux/usersSlice";
 import colors from "../colors";
+import { useNavigation } from "@react-navigation/native";
+import RoomPhotos from "./RoomPhotos";
 
 const { height } = Dimensions.get("screen");
 
-const View = styled.View``;
 const Container = styled.View`
   width: 100%;
   margin-bottom: 25px;
@@ -25,6 +25,7 @@ const Name = styled.Text`
 `;
 
 const Superhost = styled.View`
+  width: 100%;
   padding: 3px 5px;
   border: 1px solid black;
   border-radius: 4px;
@@ -50,19 +51,6 @@ const PriceNumber = styled.Text`
   font-size: 16px;
 `;
 
-const PhotosContainer = styled.View`
-  margin-bottom: 10px;
-  overflow: hidden;
-  width: 100%;
-  height: ${height / 4}px;
-  border-radius: 4px;
-`;
-
-const SlideImage = styled.Image`
-  width: 100%;
-  height: 100%;
-`;
-
 const FavButton = styled.View`
   background-color: white;
   width: 36px;
@@ -73,11 +61,15 @@ const FavButton = styled.View`
   padding-top: 5px;
 `;
 
-const Touchable = styled.TouchableOpacity`
+const IconTouchable = styled.TouchableOpacity`
   position: absolute;
   z-index: 10;
   right: 10px;
   top: 10px;
+`;
+
+const Touchable = styled.TouchableOpacity`
+  padding: 0 10px;
 `;
 
 interface IProps {
@@ -87,6 +79,7 @@ interface IProps {
   photos: any;
   name: string;
   price: number;
+  roomObj: {};
 }
 
 function getIconName(isFav) {
@@ -111,11 +104,13 @@ const RoomCard: React.FC<IProps> = ({
   photos,
   name,
   price,
+  roomObj,
 }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   return (
     <Container>
-      <Touchable onPress={() => dispatch(toggleFavs(uuid))}>
+      <IconTouchable onPress={() => dispatch(toggleFavs(uuid))}>
         <FavButton>
           <Ionicons
             size={25}
@@ -123,41 +118,22 @@ const RoomCard: React.FC<IProps> = ({
             name={getIconName(isFav)}
           />
         </FavButton>
+      </IconTouchable>
+      <RoomPhotos photos={photos} />
+      <Touchable
+        onPress={() => navigation.navigate("RoomDetail", { ...roomObj })}
+      >
+        {isSuperHost ? (
+          <Superhost>
+            <SuperhostText>Superhost</SuperhostText>
+          </Superhost>
+        ) : null}
+        <Name>{name}</Name>
+        <PriceContainer>
+          <PriceNumber>${price}</PriceNumber>
+          <PriceText> / night</PriceText>
+        </PriceContainer>
       </Touchable>
-      <PhotosContainer>
-        {photos.length === 0 ? (
-          <SlideImage
-            resizeMode="repeat"
-            source={require("../assets/roomDefault.jpeg")}
-          />
-        ) : (
-          <Swiper
-            controlsProps={{
-              prevPos: false,
-              nextPos: false,
-              dotActiveStyle: {
-                backgroundColor: "white",
-              },
-            }}
-          >
-            {photos.map((photo) => (
-              <View key={photo.id}>
-                <SlideImage source={{ uri: photo.file }} />
-              </View>
-            ))}
-          </Swiper>
-        )}
-      </PhotosContainer>
-      {isSuperHost ? (
-        <Superhost>
-          <SuperhostText>Superhost</SuperhostText>
-        </Superhost>
-      ) : null}
-      <Name>{name}</Name>
-      <PriceContainer>
-        <PriceNumber>${price}</PriceNumber>
-        <PriceText> / night</PriceText>
-      </PriceContainer>
     </Container>
   );
 };

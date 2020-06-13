@@ -24,7 +24,7 @@ interface IProps {
 
 const SavedPresenter: React.FC<IProps> = ({ rooms }) => (
   <Container>
-    <Title>Favourites</Title>
+    <Title>Favourites({rooms.length})</Title>
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingBottom: 50 }}
@@ -39,6 +39,7 @@ const SavedPresenter: React.FC<IProps> = ({ rooms }) => (
             photos={room.photos}
             isFav={room.is_fav}
             isSuperHost={room.user.superhost}
+            roomObj={room}
           />
         ))
       ) : (

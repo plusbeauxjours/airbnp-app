@@ -88,7 +88,7 @@ export const toggleFavs = (roomUuid) => async (dispatch, getState) => {
   } = getState();
   dispatch(setFav({ roomUuid }));
   try {
-    const { status } = await api.toggleFavs(uuid, roomUuid, token);
+    await api.toggleFavs(uuid, roomUuid, token);
   } catch (e) {
     console.warn(e);
   }
