@@ -25,11 +25,33 @@ const RoomContainer = styled.View`
 const RoomCard = styled.View`
   background-color: white;
   width: ${width - 80}px;
-  height: 200px;
+  height: 120px;
+  margin-right: 20px;
+  border-radius: 10px;
+  padding: 0 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const RoomPhoto = styled.Image`
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
   margin-right: 20px;
 `;
 
-const RoomName = styled.Text``;
+const Column = styled.View`
+  width: 70%;
+`;
+
+const RoomName = styled.Text`
+  font-size: 18px;
+`;
+
+const RoomPrice = styled.Text`
+  margin-top: 5px;
+  font-size: 16px;
+`;
 
 interface IProps {
   rooms: any;
@@ -37,12 +59,38 @@ interface IProps {
 
 const MapPresenter: React.FC<IProps> = ({ rooms }) => (
   <Container>
-    <MapView style={StyleSheet.absoluteFill} />
+    <MapView
+      style={StyleSheet.absoluteFill}
+      camera={{
+        center: {
+          latitude: parseFloat(rooms[0].lat),
+          longitude: parseFloat(rooms[0].lng),
+        },
+        altitude: 10 * 200,
+        pitch: 25,
+        heading: 0,
+        zoom: 10,
+      }}
+    />
     <ScrollView showsHorizontalScrollIndicator={false} pagingEnabled horizontal>
       {rooms?.map((room, index) => (
         <RoomContainer key={index}>
           <RoomCard>
-            <RoomName>{room.name}</RoomName>
+            <RoomPhoto
+              source={
+                room.photos[0]?.file
+                  ? { uri: room.photos[0]?.file }
+                  : require("../../../assets/roomDefault.jpeg")
+              }
+            />
+            <Column>
+              <RoomName>{room.name}</RoomName>
+              <RoomPrice>${room.price}</RoomPrice>
+              <RoomName>
+                {room.lat}
+                {room.lng}
+              </RoomName>
+            </Column>
           </RoomCard>
         </RoomContainer>
       ))}
