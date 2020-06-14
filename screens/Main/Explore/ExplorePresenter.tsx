@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import RoomCard from "../../../components/RoomCard";
 import { ActivityIndicator, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = styled.View`
   flex: 1;
@@ -43,47 +44,55 @@ const LoadMoreText = styled.Text`
 
 const Text = styled.Text``;
 const Touchable = styled.TouchableOpacity``;
+const TouchableWithoutFeedback = styled.TouchableWithoutFeedback``;
 
 interface IProps {
   rooms: any;
   increasePage: () => void;
 }
 
-const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => (
-  <Container>
-    {rooms.length === 0 ? (
-      <ActivityIndicator color="black" />
-    ) : (
-      <>
-        <FakeBar>
-          <FakeText>Search...</FakeText>
-        </FakeBar>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ width: "100%" }}
-          contentContainerStyle={{ paddingTop: 30 }}
-        >
-          {rooms.map((room) => (
-            <RoomCard
-              key={room.id}
-              name={room.name}
-              price={room.price}
-              photos={room.photos}
-              uuid={room.uuid}
-              isFav={room.is_fav}
-              isSuperHost={room.user.superhost}
-              roomObj={room}
-            />
-          ))}
-          <Touchable onPress={increasePage}>
-            <LoadMore>
-              <LoadMoreText>Load More</LoadMoreText>
-            </LoadMore>
-          </Touchable>
-        </ScrollView>
-      </>
-    )}
-  </Container>
-);
+const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => {
+  const navigation = useNavigation();
+  return (
+    <Container>
+      {rooms.length === 0 ? (
+        <ActivityIndicator color="black" />
+      ) : (
+        <>
+          <TouchableWithoutFeedback
+            onPress={() => navigation.navigate("Search")}
+          >
+            <FakeBar>
+              <FakeText>Search...</FakeText>
+            </FakeBar>
+          </TouchableWithoutFeedback>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{ width: "100%" }}
+            contentContainerStyle={{ paddingTop: 30 }}
+          >
+            {rooms.map((room) => (
+              <RoomCard
+                key={room.id}
+                name={room.name}
+                price={room.price}
+                photos={room.photos}
+                uuid={room.uuid}
+                isFav={room.is_fav}
+                isSuperHost={room.user.superhost}
+                roomObj={room}
+              />
+            ))}
+            <Touchable onPress={increasePage}>
+              <LoadMore>
+                <LoadMoreText>Load More</LoadMoreText>
+              </LoadMore>
+            </Touchable>
+          </ScrollView>
+        </>
+      )}
+    </Container>
+  );
+};
 
 export default ExplorePresenter;

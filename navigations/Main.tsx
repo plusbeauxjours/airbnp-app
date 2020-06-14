@@ -1,17 +1,18 @@
 import React from "react";
+import { StyleSheet } from "react-native";
+import { BlurView } from "expo-blur";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import colors from "../colors";
+import utils from "../utils";
+import BackBtn from "../components/Auth/BackBtn";
 import Explore from "../screens/Main/Explore";
 import Saved from "../screens/Main/Saved";
 import MapScreen from "../screens/Main/Map";
 import Profile from "../screens/Main/Profile";
-import colors from "../colors";
-import utils from "../utils";
-import { Ionicons } from "@expo/vector-icons";
 import RoomDetail from "../screens/Main/RoomDetail";
-import BackBtn from "../components/Auth/BackBtn";
-import { BlurView } from "expo-blur";
-import { StyleSheet } from "react-native";
+import Search from "../screens/Main/Search";
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -83,6 +84,13 @@ export default () => (
             style={StyleSheet.absoluteFill}
           />
         ),
+      }}
+    />
+    <MainNavigator.Screen
+      name="Search"
+      component={Search}
+      options={{
+        headerShown: false,
       }}
     />
   </MainNavigator.Navigator>
