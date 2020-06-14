@@ -8,7 +8,6 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
 `;
 
 const FakeBar = styled.View`
@@ -42,7 +41,6 @@ const LoadMoreText = styled.Text`
   font-weight: 500;
 `;
 
-const Text = styled.Text``;
 const Touchable = styled.TouchableOpacity``;
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback``;
 

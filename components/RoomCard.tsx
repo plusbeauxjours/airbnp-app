@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
-import { Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import utils from "../utils";
 import { useDispatch } from "react-redux";
@@ -8,8 +7,6 @@ import { toggleFavs } from "../redux/usersSlice";
 import colors from "../colors";
 import { useNavigation } from "@react-navigation/native";
 import RoomPhotos from "./RoomPhotos";
-
-const { height } = Dimensions.get("screen");
 
 const Container = styled.View`
   width: 100%;
@@ -73,10 +70,11 @@ const Touchable = styled.TouchableOpacity`
 `;
 
 interface IProps {
+  api?: boolean;
   uuid: string;
   isFav: boolean;
   isSuperHost: boolean;
-  photos: {};
+  photos: any;
   name: string;
   price: number;
   roomObj: {};
@@ -98,6 +96,7 @@ function getIconName(isFav) {
 }
 
 const RoomCard: React.FC<IProps> = ({
+  api = false,
   uuid,
   isFav,
   isSuperHost,
@@ -108,14 +107,28 @@ const RoomCard: React.FC<IProps> = ({
 }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [isFavState, setIsFavState] = useState<boolean>(isFav);
   return (
     <Container>
-      <IconTouchable onPress={() => dispatch(toggleFavs(uuid))}>
+      <IconTouchable
+        onPress={() => {
+          dispatch(toggleFavs(uuid));
+          api && setIsFavState(!isFavState);
+        }}
+      >
         <FavButton>
           <Ionicons
             size={25}
-            color={isFav ? colors.red : "black"}
-            name={getIconName(isFav)}
+            color={
+              api
+                ? isFavState
+                  ? colors.red
+                  : "black"
+                : isFav
+                ? colors.red
+                : "black"
+            }
+            name={getIconName(api ? isFavState : isFav)}
           />
         </FavButton>
       </IconTouchable>

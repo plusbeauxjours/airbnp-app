@@ -15,13 +15,13 @@ const callApi = async (method: string, path: string, data?: any, jwt?: string, p
 };
 
 export default {
-    createAccount: (form: any) => callApi("post", "/users/", form),
-    login: (form: any) => callApi("post", "/users/login/", form),
+    createAccount: (data: any) => callApi("post", "/users/", data),
+    login: (data: any) => callApi("post", "/users/login/", data),
     rooms: (page: number = 1, token: string) => callApi("get", `/rooms/?page=${page}`, null, token),
     user: (uuid: string) => callApi("get", `/users/${uuid}/`),
     favs: (uuid: string, token: string) => callApi("get", `/users/${uuid}/favs/`, null, token),
-    toggleFavs: (userUuid, roomUuid, token) =>
+    toggleFavs: (userUuid: string, roomUuid: string, token: string) =>
         callApi("put", `/users/${userUuid}/favs/`, { uuid: roomUuid }, token),
-    search: (form, token) => callApi("get", "/rooms/search/", null, token, form)
+    search: (params: {}, token: string) => callApi("get", "/rooms/search/", null, token, params)
 }
 
