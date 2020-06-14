@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("screen");
@@ -54,25 +54,44 @@ const RoomPrice = styled.Text`
 `;
 
 interface IProps {
+  mapRef: React.MutableRefObject<undefined>;
   rooms: any;
+  onScroll: (e: any) => void;
 }
 
-const MapPresenter: React.FC<IProps> = ({ rooms }) => (
+const MapPresenter: React.FC<IProps> = ({ mapRef, rooms, onScroll }) => (
   <Container>
     <MapView
+      ref={mapRef}
       style={StyleSheet.absoluteFill}
       camera={{
         center: {
           latitude: parseFloat(rooms[0].lat),
           longitude: parseFloat(rooms[0].lng),
         },
-        altitude: 10 * 200,
+        altitude: 2000,
         pitch: 25,
         heading: 0,
         zoom: 10,
       }}
-    />
-    <ScrollView showsHorizontalScrollIndicator={false} pagingEnabled horizontal>
+    >
+      {rooms?.map((room, index) => (
+        <Marker
+          key={index}
+          coordinate={{
+            latitude: parseFloat(room.lat),
+            longitude: parseFloat(room.lng),
+          }}
+        />
+      ))}
+    </MapView>
+    <ScrollView
+      scrollEventThrottle={50}
+      onScroll={onScroll}
+      showsHorizontalScrollIndicator={false}
+      pagingEnabled
+      horizontal
+    >
       {rooms?.map((room, index) => (
         <RoomContainer key={index}>
           <RoomCard>
