@@ -28,5 +28,12 @@ export default ({ rooms }) => {
       );
     }
   }, [currentIndex]);
-  return <MapPresenter mapRef={mapRef} rooms={rooms} onScroll={onScroll} />;
+  return (
+    <MapPresenter
+      currentIndex={currentIndex}
+      mapRef={mapRef}
+      rooms={rooms}
+      onScroll={onScroll}
+    />
+  );
 };
