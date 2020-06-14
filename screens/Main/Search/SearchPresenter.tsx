@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import DismissKeyboard from "../../../components/DismissKeyboard";
 import { useNavigation } from "@react-navigation/native";
-import { TextInput } from "react-native";
+import { ActivityIndicator } from "react-native";
 import colors from "../../../colors";
+import api from "../../../api";
 
 const Container = styled.View`
   padding: 0px;
@@ -70,27 +71,46 @@ const SearchText = styled.Text`
   font-size: 16px;
 `;
 
+const ResultsText = styled.Text``;
+
 export default () => {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   const [beds, setBeds] = useState<string>("");
   const [bedrooms, setBedrooms] = useState<string>("");
   const [bathrooms, setBathrooms] = useState<string>("");
   const [maxPrice, setMaxPrice] = useState<string>("");
-  const submit = () => {
+  const [results, setResults] = useState<any>(null);
+  const triggerSearch = async () => {
+    setLoading(true);
     const form = {
+      ...(search && { search }),
       ...(beds && { beds }),
       ...(bedrooms && { bedrooms }),
       ...(bathrooms && { bathrooms }),
       ...(maxPrice && { max_price: maxPrice }),
     };
-    console.log(form);
+    try {
+      console.log(search);
+      const { data } = await api.search(form, "nn");
+      setResults(data);
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <DismissKeyboard>
       <>
         <Container>
           <SearchContainer>
-            <SearchBar autoFocus={true} placeholder="Search by city..." />
+            <SearchBar
+              onChangeText={(text) => setSearch(text)}
+              autoFocus={true}
+              placeholder="Search by city..."
+            />
             <CancelContainer onPress={() => navigation.goBack()}>
               <CancelText>Cancel</CancelText>
             </CancelContainer>
@@ -141,9 +161,14 @@ export default () => {
             </FilterContainer>
           </FiltersContainer>
         </Container>
-        <SearchBtn onPress={submit}>
-          <SearchText>Search</SearchText>
+        <SearchBtn disabled={loading} onPress={triggerSearch}>
+          {loading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <SearchText>Search</SearchText>
+          )}
         </SearchBtn>
+        {results && <ResultsText>Showing {results.count} results</ResultsText>}
       </>
     </DismissKeyboard>
   );

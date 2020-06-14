@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const callApi = async (method: string, path: string, data?: any, jwt?: string) => {
+const callApi = async (method: string, path: string, data?: any, jwt?: string, params = {}) => {
     const headers = {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json"
@@ -8,7 +8,7 @@ const callApi = async (method: string, path: string, data?: any, jwt?: string) =
     const baseUrl = "http://localhost:8000/api/v1";
     const fullUrl = `${baseUrl}${path}`;
     if (method === "get" || method === "delete") {
-        return axios[method](fullUrl, { headers });
+        return axios[method](fullUrl, { headers, params });
     } else {
         return axios[method](fullUrl, data, { headers });
     }
@@ -22,5 +22,6 @@ export default {
     favs: (uuid: string, token: string) => callApi("get", `/users/${uuid}/favs/`, null, token),
     toggleFavs: (userUuid, roomUuid, token) =>
         callApi("put", `/users/${userUuid}/favs/`, { uuid: roomUuid }, token),
+    search: (form, token) => callApi("get", "/rooms/search/", null, token, form)
 }
 
