@@ -95,6 +95,7 @@ interface IProps {
   mapRef: React.MutableRefObject<undefined>;
   rooms: any;
   onScroll: (e: any) => void;
+  onRegionChangeComplete: () => void;
 }
 
 const MapPresenter: React.FC<IProps> = ({
@@ -102,6 +103,7 @@ const MapPresenter: React.FC<IProps> = ({
   mapRef,
   rooms,
   onScroll,
+  onRegionChangeComplete,
 }) => (
   <Container>
     <MapView
@@ -113,10 +115,11 @@ const MapPresenter: React.FC<IProps> = ({
           longitude: parseFloat(rooms[0].lng),
         },
         altitude: 2000,
-        pitch: 25,
+        pitch: 0,
         heading: 0,
         zoom: 10,
       }}
+      onRegionChangeComplete={onRegionChangeComplete}
     >
       {rooms?.map((room, index) => (
         <Marker
@@ -150,10 +153,6 @@ const MapPresenter: React.FC<IProps> = ({
             <Column>
               <RoomName>{room.name}</RoomName>
               <RoomPrice>${room.price}</RoomPrice>
-              <RoomName>
-                {room.lat}
-                {room.lng}
-              </RoomName>
             </Column>
           </RoomCard>
         </RoomContainer>
