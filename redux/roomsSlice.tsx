@@ -39,6 +39,23 @@ const roomsSlice = createSlice({
           room.is_fav = true;
           state.favs.push(room);
         }
+      } else {
+        const room = state.favs.find(
+          (room) => room.uuid === action.payload.roomUuid
+        );
+        console.log(room);
+        if (room) {
+          room.is_fav = false;
+          state.favs = state.favs.filter(
+            (room) => room.uuid !== action.payload.roomUuid
+          );
+        } else {
+          state.favs.push(action.payload.roomObj);
+          const room = state.favs.find(
+            (room) => room.uuid === action.payload.roomUuid
+          );
+          room.is_fav = true;
+        }
       }
     },
   },
@@ -49,6 +66,7 @@ export const {
   increasePage,
   setFavs,
   setFav,
+  setFavApi,
 } = roomsSlice.actions;
 
 export const getRooms = (page: number) => async (dispatch, getState) => {

@@ -30,12 +30,14 @@ const SavedPresenter: React.FC<IProps> = ({ rooms }) => (
       {rooms.length !== 0 ? (
         rooms.map((room) => (
           <RoomCard
+            isApi={false}
             key={room.uuid}
             uuid={room.uuid}
             name={room.name}
             price={room.price}
             photos={room.photos}
             isFav={room.is_fav}
+            username={room.user.username}
             isSuperHost={room.user.superhost}
             roomObj={room}
           />

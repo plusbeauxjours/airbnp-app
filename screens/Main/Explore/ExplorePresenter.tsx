@@ -74,6 +74,7 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => {
           >
             {rooms.map((room) => (
               <RoomCard
+                isApi={false}
                 key={room.id}
                 name={room.name}
                 price={room.price}

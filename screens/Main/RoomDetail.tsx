@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../colors";
 import RoomPhotos from "../../components/RoomPhotos";
 import utils from "../../utils";
 import MapView, { Marker } from "react-native-maps";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavs } from "../../redux/usersSlice";
 
 const Container = styled.ScrollView``;
 
@@ -58,6 +60,23 @@ const MapContainer = styled.View`
   margin-top: 30px;
 `;
 
+const FavButton = styled.View`
+  background-color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+`;
+
+const IconTouchable = styled.TouchableOpacity`
+  position: absolute;
+  z-index: 10;
+  right: 10px;
+  top: 100px;
+`;
+
 function formatQtt(number: number, name: string) {
   if (number === 1) {
     return `${number} ${name}`;
@@ -65,17 +84,52 @@ function formatQtt(number: number, name: string) {
     return `${number} ${name}s`;
   }
 }
+
 function formatTime(time) {
   const [hours, min, sec] = time.split(":");
   return `${hours} o'clock`;
 }
 
+function getIconName(isFav) {
+  const isAndroid = utils.isAndroid();
+  if (isAndroid) {
+    if (isFav) {
+      return "md-heart";
+    }
+    return "md-heart-empty";
+  } else {
+    if (isFav) {
+      return "ios-heart";
+    }
+    return "ios-heart-empty";
+  }
+}
+
 export default ({ route: { params }, navigation }) => {
+  const dispatch = useDispatch();
+  const { favs } = useSelector((state: any) => state.roomsReducer);
+  const [isFavState, setIsFavState] = useState<boolean>(
+    favs.find((fav) => fav.uuid === params.uuid)
+  );
   useEffect(() => {
     navigation.setOptions({ title: params.name });
   }, []);
   return (
     <Container>
+      <IconTouchable
+        onPress={() => {
+          dispatch(toggleFavs(params.uuid, params));
+          setIsFavState(!isFavState);
+        }}
+      >
+        <FavButton>
+          <Ionicons
+            size={25}
+            color={isFavState ? colors.red : "black"}
+            name={getIconName(isFavState)}
+          />
+        </FavButton>
+      </IconTouchable>
       <RoomPhotos photos={params.photos} factor={2} />
       <DataContainer>
         <Address>

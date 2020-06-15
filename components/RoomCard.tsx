@@ -125,7 +125,7 @@ const RoomCard: React.FC<IProps> = ({
     <Container>
       <IconTouchable
         onPress={() => {
-          dispatch(toggleFavs(uuid));
+          dispatch(toggleFavs(uuid, roomObj));
           isApi && setIsFavState(!isFavState);
         }}
       >
