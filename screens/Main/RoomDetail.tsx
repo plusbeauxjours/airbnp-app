@@ -58,17 +58,17 @@ const MapContainer = styled.View`
   margin-top: 30px;
 `;
 
-const formatQtt = (number: number, name: string) => {
+function formatQtt(number: number, name: string) {
   if (number === 1) {
     return `${number} ${name}`;
   } else {
     return `${number} ${name}s`;
   }
-};
-const formatTime = (time) => {
+}
+function formatTime(time) {
   const [hours, min, sec] = time.split(":");
   return `${hours} o'clock`;
-};
+}
 
 export default ({ route: { params }, navigation }) => {
   useEffect(() => {

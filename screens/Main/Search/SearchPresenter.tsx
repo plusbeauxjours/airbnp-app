@@ -201,8 +201,9 @@ const SearchPresenter: React.FC<IProps> = ({
       <ScrollView contentContainerStyle={{ paddingHorizontal: 15 }}>
         {results?.results?.map((room, index) => (
           <RoomCard
-            api={true}
+            isApi={true}
             key={index}
+            username={room.username}
             name={room.name}
             price={room.price}
             photos={room.photos}

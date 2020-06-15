@@ -81,7 +81,7 @@ const RowContainer = styled.View`
 `;
 
 interface IProps {
-  api?: boolean;
+  isApi?: boolean;
   uuid: string;
   isFav: boolean;
   username: string;
@@ -108,7 +108,7 @@ function getIconName(isFav) {
 }
 
 const RoomCard: React.FC<IProps> = ({
-  api = false,
+  isApi = false,
   uuid,
   isFav,
   username,
@@ -126,14 +126,14 @@ const RoomCard: React.FC<IProps> = ({
       <IconTouchable
         onPress={() => {
           dispatch(toggleFavs(uuid));
-          api && setIsFavState(!isFavState);
+          isApi && setIsFavState(!isFavState);
         }}
       >
         <FavButton>
           <Ionicons
             size={25}
             color={
-              api
+              isApi
                 ? isFavState
                   ? colors.red
                   : "black"
@@ -141,7 +141,7 @@ const RoomCard: React.FC<IProps> = ({
                 ? colors.red
                 : "black"
             }
-            name={getIconName(api ? isFavState : isFav)}
+            name={getIconName(isApi ? isFavState : isFav)}
           />
         </FavButton>
       </IconTouchable>
