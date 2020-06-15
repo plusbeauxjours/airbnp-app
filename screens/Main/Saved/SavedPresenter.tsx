@@ -4,7 +4,7 @@ import RoomCard from "../../../components/RoomCard";
 
 const Container = styled.View`
   margin-top: 70px;
-  padding: 0 30px;
+  padding: 0 10px;
 `;
 
 const ScrollView = styled.ScrollView``;

@@ -43,7 +43,7 @@ const FilterContainer = styled.View`
 
 const FilterLabel = styled.Text`
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 9px;
   margin-bottom: 5px;
   font-weight: 500;
 `;
@@ -53,7 +53,8 @@ const Filter = styled.TextInput`
   background-color: white;
   border-radius: 20px;
   box-shadow: 1px 2.5px 2.5px rgba(200, 200, 200, 0.5);
-  width: 80px;
+  width: 70px;
+  text-align: center;
 `;
 
 const SearchBtn = styled.TouchableOpacity`

@@ -8,6 +8,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  padding: 0 10px;
 `;
 
 const FakeBar = styled.View`
@@ -41,7 +42,9 @@ const LoadMoreText = styled.Text`
   font-weight: 500;
 `;
 
-const Touchable = styled.TouchableOpacity``;
+const Touchable = styled.TouchableOpacity`
+  margin: 0 20px;
+`;
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback``;
 
 interface IProps {
@@ -77,6 +80,7 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => {
                 photos={room.photos}
                 uuid={room.uuid}
                 isFav={room.is_fav}
+                username={room.user.username}
                 isSuperHost={room.user.superhost}
                 roomObj={room}
               />

@@ -22,11 +22,13 @@ const Name = styled.Text`
 `;
 
 const Superhost = styled.View`
-  width: 100%;
+  align-items: center;
+  width: 80px;
   padding: 3px 5px;
   border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 5px;
+  margin-left: 5px;
 `;
 
 const SuperhostText = styled.Text`
@@ -69,10 +71,20 @@ const Touchable = styled.TouchableOpacity`
   padding: 0 10px;
 `;
 
+const UserNameContainer = styled(PriceContainer)``;
+const Username = styled(PriceText)``;
+
+const RowContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 interface IProps {
   api?: boolean;
   uuid: string;
   isFav: boolean;
+  username: string;
   isSuperHost: boolean;
   photos: any;
   name: string;
@@ -99,6 +111,7 @@ const RoomCard: React.FC<IProps> = ({
   api = false,
   uuid,
   isFav,
+  username,
   isSuperHost,
   photos,
   name,
@@ -136,16 +149,21 @@ const RoomCard: React.FC<IProps> = ({
       <Touchable
         onPress={() => navigation.navigate("RoomDetail", { ...roomObj })}
       >
-        {isSuperHost ? (
-          <Superhost>
-            <SuperhostText>Superhost</SuperhostText>
-          </Superhost>
-        ) : null}
         <Name>{name}</Name>
-        <PriceContainer>
-          <PriceNumber>${price}</PriceNumber>
-          <PriceText> / night</PriceText>
-        </PriceContainer>
+        <RowContainer>
+          <UserNameContainer>
+            <Username>{username}</Username>
+            {isSuperHost ? (
+              <Superhost>
+                <SuperhostText>Superhost</SuperhostText>
+              </Superhost>
+            ) : null}
+          </UserNameContainer>
+          <PriceContainer>
+            <PriceNumber>${price}</PriceNumber>
+            <PriceText> / night</PriceText>
+          </PriceContainer>
+        </RowContainer>
       </Touchable>
     </Container>
   );

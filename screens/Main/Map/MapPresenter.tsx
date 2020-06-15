@@ -17,6 +17,8 @@ const ScrollView = styled.ScrollView`
   bottom: 50px;
 `;
 
+const Touchable = styled.TouchableOpacity``;
+
 const RoomContainer = styled.View`
   background-color: transparent;
   width: ${width}px;
@@ -77,6 +79,21 @@ const MarkerTriangle = styled.View<ITheme>`
   border-top-color: ${(props) => (props.selected ? colors.red : colors.green)};
 `;
 
+const Superhost = styled.View`
+  align-items: center;
+  width: 80px;
+  padding: 3px 5px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 5px;
+`;
+
+const SuperhostText = styled.Text`
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 10px;
+`;
+
 const RoomMarker = ({ selected, price }) => (
   <MarkerWrapper>
     <MarkerContainer selected={selected}>
@@ -91,19 +108,23 @@ interface ITheme {
 }
 
 interface IProps {
+  navigation: any;
   currentIndex: number;
   mapRef: React.MutableRefObject<undefined>;
   rooms: any;
   onScroll: (e: any) => void;
   onRegionChangeComplete: () => void;
+  setCurrentIndex: (currentIndex: number) => void;
 }
 
 const MapPresenter: React.FC<IProps> = ({
+  navigation,
   currentIndex,
   mapRef,
   rooms,
   onScroll,
   onRegionChangeComplete,
+  setCurrentIndex,
 }) => (
   <Container>
     <MapView
@@ -111,10 +132,10 @@ const MapPresenter: React.FC<IProps> = ({
       style={StyleSheet.absoluteFill}
       camera={{
         center: {
-          latitude: parseFloat(rooms[0].lat),
-          longitude: parseFloat(rooms[0].lng),
+          latitude: 40.766943,
+          longitude: -73.983917,
         },
-        altitude: 2000,
+        altitude: 20000,
         pitch: 0,
         heading: 0,
         zoom: 10,
@@ -124,6 +145,10 @@ const MapPresenter: React.FC<IProps> = ({
       {rooms?.map((room, index) => (
         <Marker
           key={index}
+          onPress={() => {
+            navigation.navigate("RoomDetail", { ...room });
+            setCurrentIndex(index);
+          }}
           coordinate={{
             latitude: parseFloat(room.lat),
             longitude: parseFloat(room.lng),
@@ -141,21 +166,31 @@ const MapPresenter: React.FC<IProps> = ({
       horizontal
     >
       {rooms?.map((room, index) => (
-        <RoomContainer key={index}>
-          <RoomCard>
-            <RoomPhoto
-              source={
-                room.photos[0]?.file
-                  ? { uri: room.photos[0]?.file }
-                  : require("../../../assets/roomDefault.jpeg")
-              }
-            />
-            <Column>
-              <RoomName>{room.name}</RoomName>
-              <RoomPrice>${room.price}</RoomPrice>
-            </Column>
-          </RoomCard>
-        </RoomContainer>
+        <Touchable
+          key={index}
+          onPress={() => navigation.navigate("RoomDetail", { ...room })}
+        >
+          <RoomContainer>
+            <RoomCard>
+              <RoomPhoto
+                source={
+                  room.photos[0]?.file
+                    ? { uri: room.photos[0]?.file }
+                    : require("../../../assets/roomDefault.jpeg")
+                }
+              />
+              <Column>
+                {room.user.superhost && (
+                  <Superhost>
+                    <SuperhostText>Superhost</SuperhostText>
+                  </Superhost>
+                )}
+                <RoomName>{room.name}</RoomName>
+                <RoomPrice>${room.price}</RoomPrice>
+              </Column>
+            </RoomCard>
+          </RoomContainer>
+        </Touchable>
       ))}
     </ScrollView>
   </Container>
