@@ -43,7 +43,6 @@ const roomsSlice = createSlice({
         const room = state.favs.find(
           (room) => room.uuid === action.payload.roomUuid
         );
-        console.log(room);
         if (room) {
           room.is_fav = false;
           state.favs = state.favs.filter(
