@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RoomDetailPresener from "./RoomDetailPresener";
 import utils from "../../../utils";
+import api from "../../../api";
 
 function formatQtt(number: number, name: string) {
   if (number === 1) {
@@ -29,16 +30,33 @@ function getIconName(isFav) {
     return "ios-heart-empty";
   }
 }
-export default ({ route: { params }, navigation, favs, toggleFavs }) => {
+
+export default ({ route: { params }, navigation, favs, token, toggleFavs }) => {
   const roomObj = params;
+  const [reviewLoading, setReviewLoading] = useState<boolean>(false);
+  const [reviews, setReviews] = useState<any>(null);
   const [isFavState, setIsFavState] = useState<boolean>(
     favs.find((fav) => fav.uuid === params.uuid)
   );
+  const triggerReview = async () => {
+    setReviewLoading(true);
+    try {
+      const { data } = await api.reviews(roomObj.uuid, token);
+      setReviews(data);
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setReviewLoading(false);
+    }
+  };
   useEffect(() => {
+    triggerReview();
     navigation.setOptions({ title: params.name });
   }, []);
   return (
     <RoomDetailPresener
+      reviewLoading={reviewLoading}
+      reviews={reviews}
       roomObj={roomObj}
       isFavState={isFavState}
       setIsFavState={setIsFavState}

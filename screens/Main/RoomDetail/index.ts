@@ -9,7 +9,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    return { favs: state.roomsReducer.favs };
+    return { favs: state.roomsReducer.favs, token: state.usersReducer.token };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomDetailContainer);

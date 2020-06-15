@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components/native";
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
+import { ActivityIndicator } from "react-native";
+import Moment from "moment";
+
 import RoomPhotos from "../../../components/RoomPhotos";
 import colors from "../../../colors";
 import utils from "../../../utils";
@@ -75,7 +78,51 @@ const IconTouchable = styled.TouchableOpacity`
   top: 100px;
 `;
 
+const ReviewContainer = styled.View`
+  margin-top: 20px;
+`;
+const ReviewText = styled.Text``;
+const ReviewBox = styled.View`
+  border-radius: 4px;
+  border: 0.5px solid grey;
+  padding: 10px 10px 30px 10px;
+  margin-bottom: 10px;
+`;
+const ReveiwUserRow = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  margin-bottom: 10px;
+`;
+const ReviewUserName = styled.Text``;
+const ReviewUserNameBox = styled.View`
+  flex-direction: row;
+`;
+const ReviewDate = styled.Text`
+  margin-top: 10px;
+  font-size: 10px;
+  color: grey;
+`;
+const Superhost = styled.View`
+  align-items: center;
+  width: 80px;
+  padding: 3px 5px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-bottom: 5px;
+`;
+
+const SuperhostText = styled.Text`
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 10px;
+`;
+
 export default ({
+  reviewLoading,
+  reviews,
   roomObj,
   isFavState,
   setIsFavState,
@@ -155,6 +202,35 @@ export default ({
           />
         </MapView>
       </MapContainer>
+      {reviewLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <ReviewContainer>
+          {reviews &&
+            reviews.length !== 0 &&
+            reviews.map((review, index) => (
+              <ReviewBox key={index}>
+                <ReveiwUserRow>
+                  <ReviewUserNameBox>
+                    {console.log(review)}
+                    <ReviewUserName>
+                      {review.user.username}&nbsp;
+                    </ReviewUserName>
+                    {review.user.superhost && (
+                      <Superhost>
+                        <SuperhostText>Superhost</SuperhostText>
+                      </Superhost>
+                    )}
+                  </ReviewUserNameBox>
+                </ReveiwUserRow>
+                <ReviewText> {review.text}</ReviewText>
+                <ReviewDate>
+                  {Moment(review.created_at).format("MMM-DD-YYYY")}
+                </ReviewDate>
+              </ReviewBox>
+            ))}
+        </ReviewContainer>
+      )}
     </DataContainer>
   </Container>
 );
