@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import api from "../api";
+import MapView, { Marker } from "react-native-maps";
 import UserReviews from "./UserReviews";
+import colors from "../colors";
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 
 const Container = styled.View`
   width: 100%;
@@ -61,10 +62,66 @@ const SlideImage = styled.Image`
 const UserReviewContainer = styled.View`
   padding: 0 10px 0 10px;
 `;
+const MarkerWrapper = styled.View`
+  align-items: center;
+`;
+
+const MarkerContainer = styled.View<ITheme>`
+  background-color: ${(props) => (props.selected ? colors.red : colors.green)};
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+`;
+
+const MarkerText = styled.Text`
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+const MarkerTriangle = styled.View<ITheme>`
+  border: 10px solid transparent;
+  width: 10px;
+  border-top-color: ${(props) => (props.selected ? colors.red : colors.green)};
+`;
+
+const MapContainer = styled.View`
+  height: 300px;
+  margin: 10px;
+`;
+
+const RoomMarker = ({ selected, price }) => (
+  <MarkerWrapper>
+    <MarkerContainer selected={selected}>
+      <MarkerText>${price}</MarkerText>
+    </MarkerContainer>
+    <MarkerTriangle selected={selected} />
+  </MarkerWrapper>
+);
+
+interface ITheme {
+  selected: boolean;
+}
 
 export default ({ rooms }) => {
+  const mapRef = useRef();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const navigation = useNavigation();
+  const moveMap = () => {
+    console.log(currentIndex);
+    mapRef.current?.animateCamera(
+      {
+        center: {
+          latitude: parseFloat(rooms[currentIndex].lat),
+          longitude: parseFloat(rooms[currentIndex].lng),
+        },
+      },
+      { duration: 1000 }
+    );
+  };
+  useEffect(() => {
+    moveMap();
+  }, [currentIndex]);
   return (
     <>
       <Container>
@@ -110,6 +167,45 @@ export default ({ rooms }) => {
             ))}
         </Swiper>
       </Container>
+      <MapContainer>
+        {rooms.length !== 0 && (
+          <MapView
+            ref={mapRef}
+            style={StyleSheet.absoluteFill}
+            camera={{
+              center: {
+                latitude: parseFloat(rooms[0].lat),
+                longitude: parseFloat(rooms[0].lng),
+              },
+              altitude: 2000,
+              pitch: 25,
+              heading: 0,
+              zoom: 10,
+            }}
+            // zoomEnabled={false}
+            // scrollEnabled={false}
+          >
+            {rooms?.map((room, index) => (
+              <Marker
+                key={index}
+                onPress={() => {
+                  navigation.navigate("RoomDetail", { ...room });
+                  setCurrentIndex(index);
+                }}
+                coordinate={{
+                  latitude: parseFloat(room.lat),
+                  longitude: parseFloat(room.lng),
+                }}
+              >
+                <RoomMarker
+                  selected={index === currentIndex}
+                  price={room.price}
+                />
+              </Marker>
+            ))}
+          </MapView>
+        )}
+      </MapContainer>
       {rooms.length !== 0 && (
         <UserReviewContainer>
           <UserReviews uuid={rooms[currentIndex].uuid} />

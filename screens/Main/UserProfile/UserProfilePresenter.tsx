@@ -19,10 +19,7 @@ const LoadingContainer = styled.View`
 const Text = styled.Text``;
 
 export default ({ roomLoading, user, rooms }) => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    style={{ width: "100%", marginBottom: 30 }}
-  >
+  <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
     <Header>
       <Text>{user.username}</Text>
       <Text>{user.uuid}</Text>

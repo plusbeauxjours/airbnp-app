@@ -128,11 +128,7 @@ export default ({
   formatTime,
   getIconName,
 }) => (
-  <ScrollView
-    showsVerticalScrollIndicator={false}
-    style={{ width: "100%" }}
-    contentContainerStyle={{ paddingTop: 30 }}
-  >
+  <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
     <IconTouchable
       onPress={() => {
         toggleFavs(roomObj.uuid, roomObj);
@@ -215,8 +211,8 @@ export default ({
             heading: 0,
             zoom: 10,
           }}
-          zoomEnabled={false}
-          scrollEnabled={false}
+          // zoomEnabled={false}
+          // scrollEnabled={false}
           style={{ height: "100%", width: "100%" }}
         >
           <Marker
