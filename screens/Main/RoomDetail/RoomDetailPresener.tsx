@@ -128,7 +128,10 @@ const Avatar = styled.Image`
   margin-right: 10px;
 `;
 
+const Touchable = styled.TouchableOpacity``;
+
 export default ({
+  navigation,
   reviewLoading,
   reviews,
   roomObj,
@@ -160,22 +163,28 @@ export default ({
         {roomObj.address} / ${roomObj.price}
       </Address>
       <ReveiwUserRow>
-        <ReviewUserNameBox>
-          <Avatar
-            source={
-              roomObj.user.avatar
-                ? { uri: roomObj.user.avatar }
-                : require("../../../assets/avatar.png")
-            }
-          />
+        <Touchable
+          onPress={() =>
+            navigation.navigate("UserProfile", { user: roomObj.user })
+          }
+        >
+          <ReviewUserNameBox>
+            <Avatar
+              source={
+                roomObj.user.avatar
+                  ? { uri: roomObj.user.avatar }
+                  : require("../../../assets/avatar.png")
+              }
+            />
 
-          <ReviewUserName>{roomObj.user.username}&nbsp;</ReviewUserName>
-          {roomObj.user.superhost && (
-            <Superhost>
-              <SuperhostText>Superhost</SuperhostText>
-            </Superhost>
-          )}
-        </ReviewUserNameBox>
+            <ReviewUserName>{roomObj.user.username}&nbsp;</ReviewUserName>
+            {roomObj.user.superhost && (
+              <Superhost>
+                <SuperhostText>Superhost</SuperhostText>
+              </Superhost>
+            )}
+          </ReviewUserNameBox>
+        </Touchable>
       </ReveiwUserRow>
       <PropertyInfoContainer>
         <PropertyInfoData>

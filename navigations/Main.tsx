@@ -10,7 +10,8 @@ import BackBtn from "../components/Auth/BackBtn";
 import Explore from "../screens/Main/Explore";
 import Saved from "../screens/Main/Saved";
 import MapScreen from "../screens/Main/Map";
-import Profile from "../screens/Main/Profile";
+import MyProfile from "../screens/Main/MyProfile";
+import UserProfile from "../screens/Main/UserProfile";
 import RoomDetail from "../screens/Main/RoomDetail";
 import Search from "../screens/Main/Search";
 
@@ -38,7 +39,7 @@ const Tabs = () => (
           iconName += "heart";
         } else if (route.name === "Map") {
           iconName += "map";
-        } else if (route.name === "Profile") {
+        } else if (route.name === "MyProfile") {
           iconName += "person";
         }
         return (
@@ -54,7 +55,7 @@ const Tabs = () => (
     <TabNavigator.Screen name="Explore" component={Explore} />
     <TabNavigator.Screen name="Saved" component={Saved} />
     <TabNavigator.Screen name="Map" component={MapScreen} />
-    <TabNavigator.Screen name="Profile" component={Profile} />
+    <TabNavigator.Screen name="MyProfile" component={MyProfile} />
   </TabNavigator.Navigator>
 );
 
@@ -75,6 +76,20 @@ export default () => (
     <MainNavigator.Screen
       name="RoomDetail"
       component={RoomDetail}
+      options={{
+        headerTransparent: true,
+        headerBackground: () => (
+          <BlurView
+            intensity={80}
+            tint="light"
+            style={StyleSheet.absoluteFill}
+          />
+        ),
+      }}
+    />
+    <MainNavigator.Screen
+      name="UserProfile"
+      component={UserProfile}
       options={{
         headerTransparent: true,
         headerBackground: () => (

@@ -59,20 +59,7 @@ export const userLogin = (form) => async (dispatch) => {
 export const getUser = (uuid) => async (dispatch) => {
   try {
     const { data } = await api.user(uuid);
-    console.log(data);
     dispatch(setUser({ data }));
-  } catch (e) {
-    console.warn(e);
-  }
-};
-
-export const getMe = () => async (dispatch, getState) => {
-  const {
-    usersReducer: { uuid },
-  } = getState();
-  try {
-    const { data } = await api.user(uuid);
-    dispatch(setMe({ data }));
   } catch (e) {
     console.warn(e);
   }
@@ -101,17 +88,5 @@ export const toggleFavs = (roomUuid, roomObj) => async (dispatch, getState) => {
     console.warn(e);
   }
 };
-
-// export const getUser = (uuid: string) => async (dispatch, getState) => {
-//   const {
-//     usersReducer: { uuid },
-//   } = getState();
-//   try {
-//     const { data } = await api.user(uuid);
-//     dispatch(setMe({ data }));
-//   } catch (e) {
-//     console.warn(e);
-//   }
-// };
 
 export default usersSlice.reducer;

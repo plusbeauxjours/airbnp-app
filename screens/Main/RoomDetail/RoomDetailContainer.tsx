@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RoomDetailPresener from "./RoomDetailPresener";
 import utils from "../../../utils";
 import api from "../../../api";
+import { useNavigation } from "@react-navigation/native";
 
 function formatQtt(number: number, name: string) {
   if (number === 1) {
@@ -31,8 +32,9 @@ function getIconName(isFav) {
   }
 }
 
-export default ({ route: { params }, navigation, favs, token, toggleFavs }) => {
+export default ({ route: { params }, favs, token, toggleFavs }) => {
   const roomObj = params;
+  const navigation = useNavigation();
   const [reviewLoading, setReviewLoading] = useState<boolean>(false);
   const [reviews, setReviews] = useState<any>(null);
   const [isFavState, setIsFavState] = useState<boolean>(
@@ -55,6 +57,7 @@ export default ({ route: { params }, navigation, favs, token, toggleFavs }) => {
   }, []);
   return (
     <RoomDetailPresener
+      navigation={navigation}
       reviewLoading={reviewLoading}
       reviews={reviews}
       roomObj={roomObj}

@@ -19,7 +19,7 @@ const roomsSlice = createSlice({
         state.explore.rooms = [...state.explore.rooms, ...action.payload.rooms];
       }
     },
-    increasePage(state, action) {
+    increasePage(state) {
       state.explore.page += 1;
     },
     setFavs(state, action) {

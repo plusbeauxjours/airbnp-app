@@ -168,20 +168,28 @@ const RoomCard: React.FC<IProps> = ({
           <PriceText> / night</PriceText>
         </PriceContainer>
       </Touchable>
-      <ReveiwUserRow>
-        <ReviewUserNameBox>
-          <Avatar
-            source={avatar ? { uri: avatar } : require("../assets/avatar.png")}
-          />
+      <Touchable
+        onPress={() =>
+          navigation.navigate("UserProfile", { user: roomObj.user })
+        }
+      >
+        <ReveiwUserRow>
+          <ReviewUserNameBox>
+            <Avatar
+              source={
+                avatar ? { uri: avatar } : require("../assets/avatar.png")
+              }
+            />
 
-          <ReviewUserName>{username}&nbsp;</ReviewUserName>
-          {isSuperHost && (
-            <Superhost>
-              <SuperhostText>Superhost</SuperhostText>
-            </Superhost>
-          )}
-        </ReviewUserNameBox>
-      </ReveiwUserRow>
+            <ReviewUserName>{username}&nbsp;</ReviewUserName>
+            {isSuperHost && (
+              <Superhost>
+                <SuperhostText>Superhost</SuperhostText>
+              </Superhost>
+            )}
+          </ReviewUserNameBox>
+        </ReveiwUserRow>
+      </Touchable>
     </Container>
   );
 };
