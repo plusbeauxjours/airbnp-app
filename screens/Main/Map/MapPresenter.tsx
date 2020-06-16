@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components/native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, Dimensions } from "react-native";
 import colors from "../../../colors";
+import { mapStyle } from "../../../mapStyle";
 
 const { width } = Dimensions.get("screen");
 
@@ -108,6 +109,9 @@ interface ITheme {
 }
 
 interface IProps {
+  latitude: number;
+  longitude: number;
+  altitude: number;
   navigation: any;
   currentIndex: number;
   mapRef: React.MutableRefObject<undefined>;
@@ -118,6 +122,9 @@ interface IProps {
 }
 
 const MapPresenter: React.FC<IProps> = ({
+  latitude,
+  longitude,
+  altitude,
   navigation,
   currentIndex,
   mapRef,
@@ -128,19 +135,21 @@ const MapPresenter: React.FC<IProps> = ({
 }) => (
   <Container>
     <MapView
+      // provider={PROVIDER_GOOGLE}
       ref={mapRef}
       style={StyleSheet.absoluteFill}
       camera={{
         center: {
-          latitude: 40.766943,
-          longitude: -73.983917,
+          latitude: latitude,
+          longitude: longitude,
         },
-        altitude: 20000,
+        altitude: altitude,
         pitch: 0,
         heading: 0,
         zoom: 10,
       }}
       onRegionChangeComplete={onRegionChangeComplete}
+      customMapStyle={mapStyle}
     >
       {rooms?.map((room, index) => (
         <Marker

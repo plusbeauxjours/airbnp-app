@@ -8,6 +8,9 @@ export default ({ token }) => {
   const mapRef = useRef();
   const navigation = useNavigation();
   const { width } = Dimensions.get("screen");
+  const [latitude, setLatitude] = useState<number>(40.766943);
+  const [longitude, setLongitude] = useState<number>(-73.983917);
+  const [altitude, setAltitude] = useState<number>(20000);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [rooms, setRooms] = useState<[]>([]);
   const onScroll = (e) => {
@@ -56,8 +59,14 @@ export default ({ token }) => {
       console.warn(e);
     }
   };
+  useEffect(() => {
+    setAltitude(2000);
+  }, []);
   return (
     <MapPresenter
+      latitude={latitude}
+      longitude={longitude}
+      altitude={altitude}
       navigation={navigation}
       currentIndex={currentIndex}
       setCurrentIndex={setCurrentIndex}

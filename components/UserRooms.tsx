@@ -3,9 +3,10 @@ import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
 import { StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import UserReviews from "./UserReviews";
 import colors from "../colors";
+import { mapStyle } from "../mapStyle";
 
 const { width } = Dimensions.get("screen");
 
@@ -170,6 +171,7 @@ export default ({ rooms }) => {
       <MapContainer>
         {rooms.length !== 0 && (
           <MapView
+            // provider={PROVIDER_GOOGLE}
             ref={mapRef}
             style={StyleSheet.absoluteFill}
             camera={{
@@ -182,7 +184,8 @@ export default ({ rooms }) => {
               heading: 0,
               zoom: 10,
             }}
-            // zoomEnabled={false}
+            customMapStyle={mapStyle}
+            zoomEnabled={false}
             // scrollEnabled={false}
           >
             {rooms?.map((room, index) => (

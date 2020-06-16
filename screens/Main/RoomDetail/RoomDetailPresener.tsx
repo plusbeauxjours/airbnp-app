@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import { ActivityIndicator, ScrollView } from "react-native";
 
@@ -8,6 +8,7 @@ import RoomPhotos from "../../../components/RoomPhotos";
 import colors from "../../../colors";
 import utils from "../../../utils";
 import ReviewBox from "../../../components/ReviewBox";
+import { mapStyle } from "../../../mapStyle";
 
 const DataContainer = styled.View`
   padding: 0 10px;
@@ -201,6 +202,7 @@ export default ({
       </CheckContainer>
       <MapContainer>
         <MapView
+          // provider={PROVIDER_GOOGLE}
           camera={{
             center: {
               latitude: parseFloat(roomObj.lat),
@@ -211,9 +213,10 @@ export default ({
             heading: 0,
             zoom: 10,
           }}
-          // zoomEnabled={false}
+          zoomEnabled={false}
           // scrollEnabled={false}
           style={{ height: "100%", width: "100%" }}
+          customMapStyle={mapStyle}
         >
           <Marker
             coordinate={{
