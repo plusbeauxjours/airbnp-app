@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserProfilePresenter from "./UserProfilePresenter";
 import { useNavigation } from "@react-navigation/native";
-import { getUserRooms, getUserReview } from "../../../redux/usersSlice";
 import api from "../../../api";
 
 export default ({
@@ -12,35 +11,24 @@ export default ({
 }) => {
   const navigation = useNavigation();
   const [rooms, setRooms] = useState<any>([]);
-  const [reviews, setReviews] = useState<any>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [roomLoading, setRoomsLoading] = useState<boolean>(false);
   const triggerRooms = async () => {
-    setLoading(true);
+    setRoomsLoading(true);
     try {
-      const { data } = await api.getUserRooms(user.uuid, token);
+      const { data } = await api.userRooms(user.uuid, token);
       setRooms(data);
     } catch (e) {
       console.warn(e);
     } finally {
-      setLoading(false);
-    }
-  };
-  const triggerReviews = async () => {
-    setLoading(true);
-    try {
-      const { data } = await api.getUserReview(user.uuid, token);
-      setReviews(data);
-    } catch (e) {
-      console.warn(e);
-    } finally {
-      setLoading(false);
+      setRoomsLoading(false);
     }
   };
   useEffect(() => {
     triggerRooms();
-    triggerReviews();
     navigation.setOptions({ title: user.username });
-  }, []);
+  }, [user]);
 
-  return <UserProfilePresenter user={user} rooms={rooms} reviews={reviews} />;
+  return (
+    <UserProfilePresenter roomLoading={roomLoading} user={user} rooms={rooms} />
+  );
 };

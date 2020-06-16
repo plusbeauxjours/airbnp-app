@@ -70,7 +70,7 @@ const Touchable = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
-const ReveiwUserRow = styled.View`
+const CardUserRow = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -78,8 +78,8 @@ const ReveiwUserRow = styled.View`
   height: 40px;
   padding-left: 5px;
 `;
-const ReviewUserName = styled.Text``;
-const ReviewUserNameBox = styled.View`
+const CardUserName = styled.Text``;
+const CardUserNameBox = styled.View`
   flex-direction: row;
   align-items: center;
 `;
@@ -92,7 +92,6 @@ const Avatar = styled.Image`
 `;
 
 interface IProps {
-  isProfile?: boolean;
   isApi?: boolean;
   uuid: string;
   isFav: boolean;
@@ -121,7 +120,6 @@ function getIconName(isFav) {
 }
 
 const RoomCard: React.FC<IProps> = ({
-  isProfile = false,
   isApi = false,
   uuid,
   isFav,
@@ -170,30 +168,27 @@ const RoomCard: React.FC<IProps> = ({
           <PriceText> / night</PriceText>
         </PriceContainer>
       </Touchable>
-      {!isProfile && (
-        <Touchable
-          onPress={() =>
-            navigation.navigate("UserProfile", { user: roomObj.user })
-          }
-        >
-          <ReveiwUserRow>
-            <ReviewUserNameBox>
-              <Avatar
-                source={
-                  avatar ? { uri: avatar } : require("../assets/avatar.png")
-                }
-              />
-
-              <ReviewUserName>{username}&nbsp;</ReviewUserName>
-              {isSuperHost && (
-                <Superhost>
-                  <SuperhostText>Superhost</SuperhostText>
-                </Superhost>
-              )}
-            </ReviewUserNameBox>
-          </ReveiwUserRow>
-        </Touchable>
-      )}
+      <Touchable
+        onPress={() =>
+          navigation.navigate("UserProfile", { user: roomObj.user })
+        }
+      >
+        <CardUserRow>
+          <CardUserNameBox>
+            <Avatar
+              source={
+                avatar ? { uri: avatar } : require("../assets/avatar.png")
+              }
+            />
+            <CardUserName>{username}&nbsp;</CardUserName>
+            {isSuperHost && (
+              <Superhost>
+                <SuperhostText>Superhost</SuperhostText>
+              </Superhost>
+            )}
+          </CardUserNameBox>
+        </CardUserRow>
+      </Touchable>
     </Container>
   );
 };

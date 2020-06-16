@@ -2,17 +2,16 @@ import React from "react";
 import styled from "styled-components/native";
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
-import { ActivityIndicator } from "react-native";
-import Moment from "moment";
+import { ActivityIndicator, ScrollView } from "react-native";
 
 import RoomPhotos from "../../../components/RoomPhotos";
 import colors from "../../../colors";
 import utils from "../../../utils";
-
-const Container = styled.ScrollView``;
+import ReviewBox from "../../../components/ReviewBox";
 
 const DataContainer = styled.View`
-  padding: 0 20px;
+  padding: 0 10px;
+  margin-bottom: 30px;
 `;
 
 const Address = styled.Text`
@@ -59,6 +58,7 @@ const MapContainer = styled.View`
   width: 100%;
   height: 200px;
   margin-top: 30px;
+  margin-bottom: 10px;
 `;
 
 const FavButton = styled.View`
@@ -78,17 +78,7 @@ const IconTouchable = styled.TouchableOpacity`
   top: 100px;
 `;
 
-const ReviewContainer = styled.View`
-  margin: 10px 0;
-`;
-const ReviewText = styled.Text``;
-const ReviewBox = styled.View`
-  border-radius: 4px;
-  border: 0.5px solid grey;
-  padding: 5px 10px 20px 10px;
-  margin-top: 10px;
-`;
-const ReveiwUserRow = styled.View`
+const ReviewUserRow = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
@@ -100,11 +90,7 @@ const ReviewUserNameBox = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-const ReviewDate = styled.Text`
-  margin-top: 10px;
-  font-size: 10px;
-  color: grey;
-`;
+
 const Superhost = styled.View`
   align-items: center;
   justify-content: center;
@@ -142,7 +128,11 @@ export default ({
   formatTime,
   getIconName,
 }) => (
-  <Container>
+  <ScrollView
+    showsVerticalScrollIndicator={false}
+    style={{ width: "100%" }}
+    contentContainerStyle={{ paddingTop: 30 }}
+  >
     <IconTouchable
       onPress={() => {
         toggleFavs(roomObj.uuid, roomObj);
@@ -162,7 +152,7 @@ export default ({
       <Address>
         {roomObj.address} / ${roomObj.price}
       </Address>
-      <ReveiwUserRow>
+      <ReviewUserRow>
         <Touchable
           onPress={() =>
             navigation.navigate("UserProfile", { user: roomObj.user })
@@ -185,7 +175,7 @@ export default ({
             )}
           </ReviewUserNameBox>
         </Touchable>
-      </ReveiwUserRow>
+      </ReviewUserRow>
       <PropertyInfoContainer>
         <PropertyInfoData>
           <PropertyInfoText>{formatQtt(roomObj.beds, "bed")}</PropertyInfoText>
@@ -240,38 +230,12 @@ export default ({
       {reviewLoading ? (
         <ActivityIndicator />
       ) : (
-        <ReviewContainer>
-          {reviews &&
-            reviews.length !== 0 &&
-            reviews.map((review, index) => (
-              <ReviewBox key={index}>
-                <ReveiwUserRow>
-                  <ReviewUserNameBox>
-                    <Avatar
-                      source={
-                        review.user.avatar
-                          ? { uri: review.user.avatar }
-                          : require("../../../assets/avatar.png")
-                      }
-                    />
-                    <ReviewUserName>
-                      {review.user.username}&nbsp;
-                    </ReviewUserName>
-                    {review.user.superhost && (
-                      <Superhost>
-                        <SuperhostText>Superhost</SuperhostText>
-                      </Superhost>
-                    )}
-                  </ReviewUserNameBox>
-                </ReveiwUserRow>
-                <ReviewText> {review.text}</ReviewText>
-                <ReviewDate>
-                  {Moment(review.created_at).format("MMM-DD-YYYY")}
-                </ReviewDate>
-              </ReviewBox>
-            ))}
-        </ReviewContainer>
+        reviews &&
+        reviews.length !== 0 &&
+        reviews.map((review, index) => (
+          <ReviewBox key={index} review={review} />
+        ))
       )}
     </DataContainer>
-  </Container>
+  </ScrollView>
 );

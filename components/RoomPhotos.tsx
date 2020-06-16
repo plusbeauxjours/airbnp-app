@@ -9,7 +9,6 @@ const PhotoContainer = styled.View<ITheme>`
   margin-bottom: 10px;
   overflow: hidden;
   width: 100%;
-  height: ${height / 4}px;
   height: ${(props) => `${height / props.factor}`}px;
   border-radius: 4px;
 `;

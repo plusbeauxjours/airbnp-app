@@ -71,7 +71,6 @@ export const toggleFavs = (roomUuid, roomObj) => async (dispatch, getState) => {
 };
 
 export const getUserRooms = (uuid) => async (getState) => {
-  console.log("uuid", uuid);
   const {
     usersReducer: { token },
   } = getState();
