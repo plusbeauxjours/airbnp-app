@@ -23,6 +23,8 @@ export default {
     toggleFavs: (userUuid: string, roomUuid: string, token: string) =>
         callApi("put", `/users/${userUuid}/favs/`, { uuid: roomUuid }, token),
     search: (params: {}, token: string) => callApi("get", "/rooms/search/", null, token, params),
-    reviews: (uuid: string, token: string) => callApi("get", `/rooms/${uuid}/reviews/`, null, token),
+    roomReviews: (uuid: string, token: string) => callApi("get", `/rooms/${uuid}/reviews/`, null, token),
+    userRooms: (uuid: string, token: string) => callApi("get", `/users/${uuid}/rooms/`, null, token),
+    userReviews: (uuid: string, token: string) => callApi("get", `/users/${uuid}/reviews/`, null, token)
 }
 

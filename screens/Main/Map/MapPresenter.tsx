@@ -17,7 +17,7 @@ const ScrollView = styled.ScrollView`
   bottom: 50px;
 `;
 
-const Touchable = styled.TouchableOpacity``;
+const Touchable = styled.TouchableWithoutFeedback``;
 
 const RoomContainer = styled.View`
   background-color: transparent;
@@ -26,7 +26,7 @@ const RoomContainer = styled.View`
 `;
 
 const RoomCard = styled.View`
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   width: ${width - 80}px;
   height: 120px;
   margin-right: 20px;

@@ -43,7 +43,7 @@ export default ({ route: { params }, favs, token, toggleFavs }) => {
   const triggerReview = async () => {
     setReviewLoading(true);
     try {
-      const { data } = await api.reviews(roomObj.uuid, token);
+      const { data } = await api.roomReviews(roomObj.uuid, token);
       setReviews(data);
     } catch (e) {
       console.warn(e);

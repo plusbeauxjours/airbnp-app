@@ -92,6 +92,7 @@ const Avatar = styled.Image`
 `;
 
 interface IProps {
+  isProfile?: boolean;
   isApi?: boolean;
   uuid: string;
   isFav: boolean;
@@ -120,6 +121,7 @@ function getIconName(isFav) {
 }
 
 const RoomCard: React.FC<IProps> = ({
+  isProfile = false,
   isApi = false,
   uuid,
   isFav,
@@ -168,28 +170,30 @@ const RoomCard: React.FC<IProps> = ({
           <PriceText> / night</PriceText>
         </PriceContainer>
       </Touchable>
-      <Touchable
-        onPress={() =>
-          navigation.navigate("UserProfile", { user: roomObj.user })
-        }
-      >
-        <ReveiwUserRow>
-          <ReviewUserNameBox>
-            <Avatar
-              source={
-                avatar ? { uri: avatar } : require("../assets/avatar.png")
-              }
-            />
+      {!isProfile && (
+        <Touchable
+          onPress={() =>
+            navigation.navigate("UserProfile", { user: roomObj.user })
+          }
+        >
+          <ReveiwUserRow>
+            <ReviewUserNameBox>
+              <Avatar
+                source={
+                  avatar ? { uri: avatar } : require("../assets/avatar.png")
+                }
+              />
 
-            <ReviewUserName>{username}&nbsp;</ReviewUserName>
-            {isSuperHost && (
-              <Superhost>
-                <SuperhostText>Superhost</SuperhostText>
-              </Superhost>
-            )}
-          </ReviewUserNameBox>
-        </ReveiwUserRow>
-      </Touchable>
+              <ReviewUserName>{username}&nbsp;</ReviewUserName>
+              {isSuperHost && (
+                <Superhost>
+                  <SuperhostText>Superhost</SuperhostText>
+                </Superhost>
+              )}
+            </ReviewUserNameBox>
+          </ReveiwUserRow>
+        </Touchable>
+      )}
     </Container>
   );
 };

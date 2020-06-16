@@ -8,7 +8,6 @@ const usersSlice = createSlice({
     isLoggedIn: false,
     token: null,
     me: null,
-    users: [],
     uuid: null,
   },
   reducers: {
@@ -21,23 +20,14 @@ const usersSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
       state.me = null;
-      state.users = [];
     },
     setMe(state, action) {
       state.me = action.payload.data;
     },
-    setUser(state, action) {
-      const user = state.users.find(
-        (user) => user.uuid === action.payload.data.uuid
-      );
-      if (!user) {
-        state.users.push(action.payload.data);
-      }
-    },
   },
 });
 
-export const { logIn, logOut, setMe, setUser } = usersSlice.actions;
+export const { logIn, logOut, setMe } = usersSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
   try {
@@ -53,15 +43,6 @@ export const userLogin = (form) => async (dispatch) => {
     }
   } catch (e) {
     alert("Wrong user/password");
-  }
-};
-
-export const getUser = (uuid) => async (dispatch) => {
-  try {
-    const { data } = await api.user(uuid);
-    dispatch(setUser({ data }));
-  } catch (e) {
-    console.warn(e);
   }
 };
 
@@ -84,6 +65,28 @@ export const toggleFavs = (roomUuid, roomObj) => async (dispatch, getState) => {
   dispatch(setFav({ roomUuid, roomObj }));
   try {
     await api.toggleFavs(uuid, roomUuid, token);
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+export const getUserRooms = (uuid) => async (getState) => {
+  console.log("uuid", uuid);
+  const {
+    usersReducer: { token },
+  } = getState();
+  try {
+    return api.userRooms(uuid, token);
+  } catch (e) {
+    console.warn(e);
+  }
+};
+export const getUserReview = (uuid) => async (getState) => {
+  const {
+    usersReducer: { token },
+  } = getState();
+  try {
+    await api.userReviews(uuid, token);
   } catch (e) {
     console.warn(e);
   }
