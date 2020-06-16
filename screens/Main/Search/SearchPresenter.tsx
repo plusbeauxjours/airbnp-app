@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components/native";
 import { ActivityIndicator } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import DismissKeyboard from "../../../components/DismissKeyboard";
 import RoomCard from "../../../components/RoomCard";
 import colors from "../../../colors";
+import utils from "../../../utils";
 
 const Container = styled.View`
   padding: 0px;
@@ -19,7 +21,7 @@ const SearchContainer = styled.View`
 
 const SearchBar = styled.TextInput`
   height: 40px;
-  width: 80%;
+  width: 100%;
   background-color: white;
   box-shadow: 1px 5px 5px rgba(200, 200, 200, 0.5);
   border-radius: 7px;
@@ -27,9 +29,10 @@ const SearchBar = styled.TextInput`
   padding-left: 10px;
 `;
 
-const CancelContainer = styled.TouchableOpacity``;
-
-const CancelText = styled.Text``;
+const CancelContainer = styled.TouchableOpacity`
+  position: absolute;
+  right: 35px;
+`;
 
 const FiltersContainer = styled.ScrollView`
   flex-direction: row;
@@ -130,7 +133,11 @@ const SearchPresenter: React.FC<IProps> = ({
             placeholder="Search by city..."
           />
           <CancelContainer onPress={() => navigation.goBack()}>
-            <CancelText>Cancel</CancelText>
+            <Ionicons
+              name={utils.isAndroid() ? "md-backspace" : "ios-backspace"}
+              color="rgba(200, 200, 200, 0.8)"
+              size={24}
+            />
           </CancelContainer>
         </SearchContainer>
         <FiltersContainer
