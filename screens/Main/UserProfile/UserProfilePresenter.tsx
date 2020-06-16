@@ -15,14 +15,12 @@ const LoadingContainer = styled.View`
   justify-content: center;
   align-items: center;
 `;
-const Text = styled.Text`
-  margin-bottom: 5px;
-`;
+const Text = styled.Text``;
 const Avatar = styled.Image`
   width: 80px;
   height: 80px;
   border-radius: 40px;
-  margin-top: 80px;
+  margin-top: 100px;
   margin-bottom: 20px;
 `;
 const Superhost = styled.View`
@@ -43,11 +41,12 @@ const SuperhostText = styled.Text`
 const Username = styled.Text`
   font-weight: 600;
 `;
-const UsernameRow = styled.View`
+const Row = styled.View`
   flex-direction: row;
+  margin-bottom: 5px;
 `;
 
-export default ({ roomLoading, user, rooms }) => (
+export default ({ formatQty, roomLoading, user, rooms }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
     <Header>
       {console.log(user)}
@@ -58,18 +57,22 @@ export default ({ roomLoading, user, rooms }) => (
             : require("../../../assets/avatar.png")
         }
       />
-      <UsernameRow>
+      <Row>
         <Text>{user.first_name}&nbsp;</Text>
         <Text>{user.last_name}</Text>
-      </UsernameRow>
-      <UsernameRow>
+      </Row>
+      <Row>
         <Username>@{user.username}</Username>
         {user.superhost && (
           <Superhost>
             <SuperhostText>Superhost</SuperhostText>
           </Superhost>
         )}
-      </UsernameRow>
+      </Row>
+      <Row>
+        <Text>{formatQty(user.room_count, "Room")}&nbsp;</Text>
+        <Text>{formatQty(user.review_count, "Review")}</Text>
+      </Row>
     </Header>
     {roomLoading ? (
       <LoadingContainer>

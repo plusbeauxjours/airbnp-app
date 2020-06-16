@@ -100,7 +100,7 @@ interface IProps {
   setMaxPrice: (maxPrice: string) => void;
   triggerSearch: (event: any) => void;
   results: any;
-  formatQtt: (number: number, name: string) => void;
+  formatQty: (number: number, name: string) => void;
 }
 
 const SearchPresenter: React.FC<IProps> = ({
@@ -120,7 +120,7 @@ const SearchPresenter: React.FC<IProps> = ({
   setMaxPrice,
   triggerSearch,
   results,
-  formatQtt,
+  formatQty,
 }) => (
   <DismissKeyboard>
     <>
@@ -203,7 +203,7 @@ const SearchPresenter: React.FC<IProps> = ({
         )}
       </SearchBtn>
       {results && (
-        <ResultsText>Showing {formatQtt(results.count, "result")}</ResultsText>
+        <ResultsText>Showing {formatQty(results.count, "result")}</ResultsText>
       )}
       <ScrollView contentContainerStyle={{ paddingHorizontal: 15 }}>
         {results?.results?.map((room, index) => (

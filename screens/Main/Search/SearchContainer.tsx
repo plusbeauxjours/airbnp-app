@@ -34,7 +34,7 @@ export default ({ token }) => {
       setLoading(false);
     }
   };
-  const formatQtt = (number: number, name: string) => {
+  const formatQty = (number: number, name: string) => {
     if (number === 1) {
       return `${number} ${name}`;
     } else {
@@ -43,7 +43,7 @@ export default ({ token }) => {
   };
   return (
     <SearchPresenter
-      formatQtt={formatQtt}
+      formatQty={formatQty}
       loading={loading}
       navigation={navigation}
       search={search}

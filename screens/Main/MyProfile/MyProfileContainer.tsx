@@ -3,6 +3,14 @@ import MyProfilePresenter from "./MyProfilePresenter";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../../api";
 
+function formatQty(number: number, name: string) {
+  if (number === 1) {
+    return `${number} ${name}`;
+  } else {
+    return `${number} ${name}s`;
+  }
+}
+
 interface IProps {
   uuid: string;
   me: any;
@@ -28,7 +36,14 @@ const MyProfileContainer: React.FC<IProps> = ({ me, token }) => {
     navigation.setOptions({ title: me.username });
   }, []);
 
-  return <MyProfilePresenter me={me} roomLoading={roomLoading} rooms={rooms} />;
+  return (
+    <MyProfilePresenter
+      formatQty={formatQty}
+      me={me}
+      roomLoading={roomLoading}
+      rooms={rooms}
+    />
+  );
 };
 
 export default MyProfileContainer;

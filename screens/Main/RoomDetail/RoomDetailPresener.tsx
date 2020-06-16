@@ -124,7 +124,7 @@ export default ({
   isFavState,
   setIsFavState,
   toggleFavs,
-  formatQtt,
+  formatQty,
   formatTime,
   getIconName,
 }) => (
@@ -174,16 +174,16 @@ export default ({
       </ReviewUserRow>
       <PropertyInfoContainer>
         <PropertyInfoData>
-          <PropertyInfoText>{formatQtt(roomObj.beds, "bed")}</PropertyInfoText>
+          <PropertyInfoText>{formatQty(roomObj.beds, "bed")}</PropertyInfoText>
         </PropertyInfoData>
         <PropertyInfoData>
           <PropertyInfoText>
-            {formatQtt(roomObj.bedrooms, "bedroom")}
+            {formatQty(roomObj.bedrooms, "bedroom")}
           </PropertyInfoText>
         </PropertyInfoData>
         <PropertyInfoData>
           <PropertyInfoText>
-            {formatQtt(roomObj.bathrooms, "bathroom")}
+            {formatQty(roomObj.bathrooms, "bathroom")}
           </PropertyInfoText>
         </PropertyInfoData>
       </PropertyInfoContainer>

@@ -3,6 +3,13 @@ import UserProfilePresenter from "./UserProfilePresenter";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../../api";
 
+function formatQty(number: number, name: string) {
+  if (number === 1) {
+    return `${number} ${name}`;
+  } else {
+    return `${number} ${name}s`;
+  }
+}
 export default ({
   route: {
     params: { user },
@@ -29,6 +36,11 @@ export default ({
   }, [user]);
 
   return (
-    <UserProfilePresenter roomLoading={roomLoading} user={user} rooms={rooms} />
+    <UserProfilePresenter
+      formatQty={formatQty}
+      roomLoading={roomLoading}
+      user={user}
+      rooms={rooms}
+    />
   );
 };

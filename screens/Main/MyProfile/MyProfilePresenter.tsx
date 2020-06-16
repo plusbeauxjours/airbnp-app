@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components/native";
 import { ActivityIndicator, ScrollView } from "react-native";
-import colors from "../../../colors";
 import UserRooms from "../../../components/UserRooms";
 
 const Header = styled.View`
   width: 100%;
-  height: 300px;
+  height: 270px;
   justify-content: center;
   align-items: center;
-  background-color: ${colors.green};
+  background-color: rgba(200, 200, 200, 0.2);
 `;
 const LoadingContainer = styled.View`
   height: 200px;
@@ -17,12 +16,59 @@ const LoadingContainer = styled.View`
   align-items: center;
 `;
 const Text = styled.Text``;
-
-export default ({ roomLoading, me, rooms }) => (
+const Avatar = styled.Image`
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  margin-top: 70px;
+  margin-bottom: 20px;
+`;
+const Superhost = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 20px;
+  padding: 3px 5px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-left: 5px;
+`;
+const SuperhostText = styled.Text`
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 10px;
+`;
+const Username = styled.Text`
+  font-weight: 600;
+`;
+const Row = styled.View`
+  flex-direction: row;
+  margin-bottom: 5px;
+`;
+export default ({ formatQty, roomLoading, me, rooms }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
     <Header>
-      <Text>{me.username}</Text>
-      <Text>{me.uuid}</Text>
+      <Avatar
+        source={
+          me.avatar ? { uri: me.avatar } : require("../../../assets/avatar.png")
+        }
+      />
+      <Row>
+        <Text>{me.first_name}&nbsp;</Text>
+        <Text>{me.last_name}</Text>
+      </Row>
+      <Row>
+        <Username>@{me.username}</Username>
+        {me.superhost && (
+          <Superhost>
+            <SuperhostText>Superhost</SuperhostText>
+          </Superhost>
+        )}
+      </Row>
+      <Row>
+        <Text>{formatQty(me.room_count, "Room")}&nbsp;</Text>
+        <Text>{formatQty(me.review_count, "Review")}</Text>
+      </Row>
     </Header>
     {roomLoading ? (
       <LoadingContainer>

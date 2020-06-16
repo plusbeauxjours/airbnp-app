@@ -4,7 +4,7 @@ import utils from "../../../utils";
 import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
 
-function formatQtt(number: number, name: string) {
+function formatQty(number: number, name: string) {
   if (number === 1) {
     return `${number} ${name}`;
   } else {
@@ -64,7 +64,7 @@ export default ({ route: { params }, favs, token, toggleFavs }) => {
       isFavState={isFavState}
       setIsFavState={setIsFavState}
       toggleFavs={toggleFavs}
-      formatQtt={formatQtt}
+      formatQty={formatQty}
       formatTime={formatTime}
       getIconName={getIconName}
     />
