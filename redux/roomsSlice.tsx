@@ -65,7 +65,6 @@ export const {
   increasePage,
   setFavs,
   setFav,
-  setFavApi,
 } = roomsSlice.actions;
 
 export const getRooms = (page: number) => async (dispatch, getState) => {

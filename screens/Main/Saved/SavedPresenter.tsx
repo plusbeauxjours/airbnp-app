@@ -39,6 +39,7 @@ const SavedPresenter: React.FC<IProps> = ({ rooms }) => (
             isFav={room.is_fav}
             username={room.user.username}
             isSuperHost={room.user.superhost}
+            avatar={room.user.avatar}
             roomObj={room}
           />
         ))

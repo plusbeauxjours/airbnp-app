@@ -210,6 +210,7 @@ const SearchPresenter: React.FC<IProps> = ({
             uuid={room.uuid}
             isFav={room.is_fav}
             isSuperHost={room.user.superhost}
+            avatar={room.user.avatar}
             roomObj={room}
           />
         ))}

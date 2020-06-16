@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import api from "../api";
-import { setFavs, setFav, setFavApi } from "./roomsSlice";
+import { setFavs, setFav } from "./roomsSlice";
 
 const usersSlice = createSlice({
   name: "users",
@@ -27,14 +27,12 @@ const usersSlice = createSlice({
       state.me = action.payload.data;
     },
     setUser(state, action) {
-      action.payload.rooms.forEach((payloadUser) => {
-        const exists = state.users.find(
-          (savedUser) => savedUser.uuid === payloadUser.uuid
-        );
-        if (!exists) {
-          state.users.push(payloadUser);
-        }
-      });
+      const user = state.users.find(
+        (user) => user.uuid === action.payload.data.uuid
+      );
+      if (!user) {
+        state.users.push(action.payload.data);
+      }
     },
   },
 });
@@ -55,6 +53,16 @@ export const userLogin = (form) => async (dispatch) => {
     }
   } catch (e) {
     alert("Wrong user/password");
+  }
+};
+
+export const getUser = (uuid) => async (dispatch) => {
+  try {
+    const { data } = await api.user(uuid);
+    console.log(data);
+    dispatch(setUser({ data }));
+  } catch (e) {
+    console.warn(e);
   }
 };
 

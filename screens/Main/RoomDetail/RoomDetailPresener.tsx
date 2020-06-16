@@ -16,12 +16,12 @@ const DataContainer = styled.View`
 `;
 
 const Address = styled.Text`
-  margin-top: 10px;
+  margin: 10px 0;
   font-size: 20px;
 `;
 
 const PropertyInfoContainer = styled.View`
-  margin-top: 20px;
+  margin-top: 10px;
   flex-direction: row;
 `;
 
@@ -79,14 +79,14 @@ const IconTouchable = styled.TouchableOpacity`
 `;
 
 const ReviewContainer = styled.View`
-  margin-top: 20px;
+  margin: 10px 0;
 `;
 const ReviewText = styled.Text``;
 const ReviewBox = styled.View`
   border-radius: 4px;
   border: 0.5px solid grey;
-  padding: 10px 10px 30px 10px;
-  margin-bottom: 10px;
+  padding: 5px 10px 20px 10px;
+  margin-top: 10px;
 `;
 const ReveiwUserRow = styled.View`
   flex: 1;
@@ -94,11 +94,11 @@ const ReveiwUserRow = styled.View`
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  margin-bottom: 10px;
 `;
 const ReviewUserName = styled.Text``;
 const ReviewUserNameBox = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 const ReviewDate = styled.Text`
   margin-top: 10px;
@@ -107,17 +107,25 @@ const ReviewDate = styled.Text`
 `;
 const Superhost = styled.View`
   align-items: center;
+  justify-content: center;
   width: 80px;
+  height: 20px;
   padding: 3px 5px;
   border: 1px solid black;
   border-radius: 4px;
-  margin-bottom: 5px;
 `;
 
 const SuperhostText = styled.Text`
   text-transform: uppercase;
   font-weight: 500;
   font-size: 10px;
+`;
+
+const Avatar = styled.Image`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-right: 10px;
 `;
 
 export default ({
@@ -151,6 +159,24 @@ export default ({
       <Address>
         {roomObj.address} / ${roomObj.price}
       </Address>
+      <ReveiwUserRow>
+        <ReviewUserNameBox>
+          <Avatar
+            source={
+              roomObj.user.avatar
+                ? { uri: roomObj.user.avatar }
+                : require("../../../assets/avatar.png")
+            }
+          />
+
+          <ReviewUserName>{roomObj.user.username}&nbsp;</ReviewUserName>
+          {roomObj.user.superhost && (
+            <Superhost>
+              <SuperhostText>Superhost</SuperhostText>
+            </Superhost>
+          )}
+        </ReviewUserNameBox>
+      </ReveiwUserRow>
       <PropertyInfoContainer>
         <PropertyInfoData>
           <PropertyInfoText>{formatQtt(roomObj.beds, "bed")}</PropertyInfoText>
@@ -212,7 +238,13 @@ export default ({
               <ReviewBox key={index}>
                 <ReveiwUserRow>
                   <ReviewUserNameBox>
-                    {console.log(review)}
+                    <Avatar
+                      source={
+                        review.user.avatar
+                          ? { uri: review.user.avatar }
+                          : require("../../../assets/avatar.png")
+                      }
+                    />
                     <ReviewUserName>
                       {review.user.username}&nbsp;
                     </ReviewUserName>

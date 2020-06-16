@@ -17,8 +17,6 @@ const Container = styled.View`
 
 const Name = styled.Text`
   font-size: 18px;
-  font-weight: 300;
-  margin-bottom: 7px;
 `;
 
 const Superhost = styled.View`
@@ -27,7 +25,6 @@ const Superhost = styled.View`
   padding: 3px 5px;
   border: 1px solid black;
   border-radius: 4px;
-  margin-bottom: 5px;
   margin-left: 5px;
 `;
 
@@ -68,16 +65,30 @@ const IconTouchable = styled.TouchableOpacity`
 `;
 
 const Touchable = styled.TouchableOpacity`
-  padding: 0 10px;
-`;
-
-const UserNameContainer = styled(PriceContainer)``;
-const Username = styled(PriceText)``;
-
-const RowContainer = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const ReveiwUserRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 40px;
+  padding-left: 5px;
+`;
+const ReviewUserName = styled.Text``;
+const ReviewUserNameBox = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Avatar = styled.Image`
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  margin-right: 10px;
 `;
 
 interface IProps {
@@ -89,6 +100,7 @@ interface IProps {
   photos: any;
   name: string;
   price: number;
+  avatar?: string;
   roomObj: {};
 }
 
@@ -116,6 +128,7 @@ const RoomCard: React.FC<IProps> = ({
   photos,
   name,
   price,
+  avatar,
   roomObj,
 }) => {
   const dispatch = useDispatch();
@@ -150,21 +163,25 @@ const RoomCard: React.FC<IProps> = ({
         onPress={() => navigation.navigate("RoomDetail", { ...roomObj })}
       >
         <Name>{name}</Name>
-        <RowContainer>
-          <UserNameContainer>
-            <Username>{username}</Username>
-            {isSuperHost ? (
-              <Superhost>
-                <SuperhostText>Superhost</SuperhostText>
-              </Superhost>
-            ) : null}
-          </UserNameContainer>
-          <PriceContainer>
-            <PriceNumber>${price}</PriceNumber>
-            <PriceText> / night</PriceText>
-          </PriceContainer>
-        </RowContainer>
+        <PriceContainer>
+          <PriceNumber>${price}</PriceNumber>
+          <PriceText> / night</PriceText>
+        </PriceContainer>
       </Touchable>
+      <ReveiwUserRow>
+        <ReviewUserNameBox>
+          <Avatar
+            source={avatar ? { uri: avatar } : require("../assets/avatar.png")}
+          />
+
+          <ReviewUserName>{username}&nbsp;</ReviewUserName>
+          {isSuperHost && (
+            <Superhost>
+              <SuperhostText>Superhost</SuperhostText>
+            </Superhost>
+          )}
+        </ReviewUserNameBox>
+      </ReveiwUserRow>
     </Container>
   );
 };
