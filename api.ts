@@ -17,6 +17,7 @@ const callApi = async (method: string, path: string, data?: any, jwt?: string, p
 export default {
     createAccount: (data: any) => callApi("post", "/users/", data),
     login: (data: any) => callApi("post", "/users/login/", data),
+    appleLogin: (data: any) => callApi("post", "/users/appleLogin/", data),
     rooms: (page: number = 1, token: string) => callApi("get", `/rooms/?page=${page}`, null, token),
     user: (uuid: string) => callApi("get", `/users/${uuid}/`),
     favs: (uuid: string, token: string) => callApi("get", `/users/${uuid}/favs/`, null, token),

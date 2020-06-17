@@ -4,6 +4,7 @@ import Welcome from "../screens/Auth/Welcome";
 import SignIn from "../screens/Auth/SignIn";
 import SignUp from "../screens/Auth/SignUp";
 import BackBtn from "../components/Auth/BackBtn";
+import AppleApproach from "../components/AppleApproach";
 
 const Auth = createStackNavigator();
 
@@ -28,12 +29,17 @@ export default () => (
     <Auth.Screen
       name="SignUp"
       component={SignUp}
-      options={{ title: "Sing Up" }}
+      options={{ title: "SingUp" }}
     />
     <Auth.Screen
       name="SignIn"
       component={SignIn}
-      options={{ title: "Sing In" }}
+      options={{ title: "SingIn" }}
+    />
+    <Auth.Screen
+      name="AppleLogin"
+      component={AppleApproach}
+      options={{ title: "Apple LogIn" }}
     />
   </Auth.Navigator>
 );

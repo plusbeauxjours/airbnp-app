@@ -31,7 +31,7 @@ const usersSlice = createSlice({
 
 export const { logIn, logOut, setMe } = usersSlice.actions;
 
-export const userLogin = (form) => async (dispatch) => {
+export const userLogin = (form: {}) => async (dispatch) => {
   try {
     const {
       data: { uuid, token },
@@ -45,6 +45,16 @@ export const userLogin = (form) => async (dispatch) => {
     }
   } catch (e) {
     alert("Wrong user/password");
+  }
+};
+
+export const appleLogin = (uuid: string, token: string) => async (dispatch) => {
+  if (uuid && token) {
+    dispatch(logIn({ uuid, token }));
+    const { data } = await api.user(uuid);
+    if (data) {
+      dispatch(setMe({ data }));
+    }
   }
 };
 
@@ -66,7 +76,10 @@ export const getFavs = () => async (dispatch, getState) => {
   }
 };
 
-export const toggleFavs = (roomUuid, roomObj) => async (dispatch, getState) => {
+export const toggleFavs = (roomUuid: string, roomObj: {}) => async (
+  dispatch,
+  getState
+) => {
   const {
     usersReducer: { uuid, token },
   } = getState();
@@ -78,7 +91,7 @@ export const toggleFavs = (roomUuid, roomObj) => async (dispatch, getState) => {
   }
 };
 
-export const getUserRooms = (uuid) => async (getState) => {
+export const getUserRooms = (uuid: string) => async (getState) => {
   const {
     usersReducer: { token },
   } = getState();
@@ -88,7 +101,7 @@ export const getUserRooms = (uuid) => async (getState) => {
     console.warn(e);
   }
 };
-export const getUserReview = (uuid) => async (getState) => {
+export const getUserReview = (uuid: string) => async (getState) => {
   const {
     usersReducer: { token },
   } = getState();

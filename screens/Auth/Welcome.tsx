@@ -4,6 +4,8 @@ import { StatusBar } from "react-native";
 import { BlurView } from "expo-blur";
 import Btn from "../../components/Auth/Btn";
 import { useNavigation } from "@react-navigation/native";
+import AppleApproach from "../../components/AppleApproach";
+import { AppleLogin } from "../../redux/usersSlice";
 
 const LOGO_URL =
   "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png";
@@ -42,8 +44,9 @@ export default () => {
       >
         <Logo source={{ uri: LOGO_URL }} />
         <BtnContainer>
-          <Btn onPress={goToSignUp} text={"Sign Up"} accent={true} />
-          <Btn onPress={goToSignIn} text={"Sign In"} color={"white"} />
+          <Btn onPress={goToSignUp} text={"SignUp"} accent={true} />
+          <Btn onPress={goToSignIn} text={"SignIn"} color={"white"} />
+          <AppleApproach />
         </BtnContainer>
       </BlurView>
       <Image source={require("../../assets/loginBg.jpeg")} />

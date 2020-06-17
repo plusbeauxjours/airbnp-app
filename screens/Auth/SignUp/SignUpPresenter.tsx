@@ -69,7 +69,7 @@ const SignInpresenter: React.FC<IProps> = ({
             stateFn={setPassword}
           />
         </InputContainer>
-        <Btn loading={loading} text={"Sign Up"} accent onPress={handleSubmit} />
+        <Btn loading={loading} text={"SignUp"} accent onPress={handleSubmit} />
       </KeyboardAvoidingView>
     </Container>
   </DismissKeyboard>
