@@ -49,7 +49,6 @@ const Row = styled.View`
 export default ({ formatQty, roomLoading, user, rooms }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
     <Header>
-      {console.log(user)}
       <Avatar
         source={
           user.avatar

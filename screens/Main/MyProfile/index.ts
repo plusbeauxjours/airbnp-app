@@ -1,5 +1,10 @@
 import MyProfileContainer from "./MyProfileContainer"
 import { connect } from "react-redux";
+import { userLogout } from '../../../redux/usersSlice';
+
+function mapDispatchToProps(dispatch) {
+    return { userLogout: () => dispatch(userLogout()) }
+}
 
 function mapStateToProps(state) {
     return {
@@ -9,4 +14,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(MyProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfileContainer);

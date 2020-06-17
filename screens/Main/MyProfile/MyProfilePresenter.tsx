@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components/native";
 import { ActivityIndicator, ScrollView } from "react-native";
 import UserRooms from "../../../components/UserRooms";
+import { Ionicons } from "@expo/vector-icons";
+import utils from "../../../utils";
 
 const Header = styled.View`
   width: 100%;
   height: 270px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: rgba(200, 200, 200, 0.2);
 `;
@@ -20,7 +22,7 @@ const Avatar = styled.Image`
   width: 80px;
   height: 80px;
   border-radius: 40px;
-  margin-top: 70px;
+  margin-top: 15px;
   margin-bottom: 20px;
 `;
 const Superhost = styled.View`
@@ -45,9 +47,26 @@ const Row = styled.View`
   flex-direction: row;
   margin-bottom: 5px;
 `;
-export default ({ formatQty, roomLoading, me, rooms }) => (
+const LogoutContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin: 50px 50px 0 0;
+`;
+const Touchable = styled.TouchableOpacity``;
+export default ({ formatQty, roomLoading, me, rooms, userLogout }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
     <Header>
+      <LogoutContainer>
+        <Touchable onPress={userLogout}>
+          <Ionicons
+            name={utils.isAndroid ? "md-log-out" : "ios-log-out"}
+            size={28}
+            color={"rgba(0, 0, 0, 0.5)"}
+          />
+        </Touchable>
+      </LogoutContainer>
       <Avatar
         source={
           me.avatar ? { uri: me.avatar } : require("../../../assets/avatar.png")

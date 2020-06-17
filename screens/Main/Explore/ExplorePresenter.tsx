@@ -72,10 +72,10 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => {
             style={{ width: "100%" }}
             contentContainerStyle={{ paddingTop: 30 }}
           >
-            {rooms.map((room) => (
+            {rooms.map((room, index) => (
               <RoomCard
                 isApi={false}
-                key={room.id}
+                key={index}
                 name={room.name}
                 price={room.price}
                 photos={room.photos}

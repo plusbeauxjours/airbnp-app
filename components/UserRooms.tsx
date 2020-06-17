@@ -109,7 +109,6 @@ export default ({ rooms }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const navigation = useNavigation();
   const moveMap = () => {
-    console.log(currentIndex);
     mapRef.current?.animateCamera(
       {
         center: {
@@ -138,33 +137,31 @@ export default ({ rooms }) => {
         >
           {rooms.length !== 0 &&
             rooms.map((room, index) => (
-              <>
-                <Touchable
-                  key={index}
-                  onPress={() => navigation.navigate("RoomDetail", { ...room })}
-                >
-                  <RoomContainer>
-                    {room.photos.length === 0 ? (
-                      <SlideImage
-                        resizeMode="repeat"
-                        source={require("../assets/roomDefault.jpeg")}
-                      />
-                    ) : (
-                      <SlideImage
-                        key={index}
-                        source={{ uri: room.photos[0].file }}
-                      />
-                    )}
-                    <InfoRow>
-                      <Name>{room.name}</Name>
-                      <PriceContainer>
-                        <PriceNumber>${room.price}</PriceNumber>
-                        <PriceText> / night</PriceText>
-                      </PriceContainer>
-                    </InfoRow>
-                  </RoomContainer>
-                </Touchable>
-              </>
+              <Touchable
+                key={index}
+                onPress={() => navigation.navigate("RoomDetail", { ...room })}
+              >
+                <RoomContainer>
+                  {room.photos.length === 0 ? (
+                    <SlideImage
+                      resizeMode="repeat"
+                      source={require("../assets/roomDefault.jpeg")}
+                    />
+                  ) : (
+                    <SlideImage
+                      key={index}
+                      source={{ uri: room.photos[0].file }}
+                    />
+                  )}
+                  <InfoRow>
+                    <Name>{room.name}</Name>
+                    <PriceContainer>
+                      <PriceNumber>${room.price}</PriceNumber>
+                      <PriceText> / night</PriceText>
+                    </PriceContainer>
+                  </InfoRow>
+                </RoomContainer>
+              </Touchable>
             ))}
         </Swiper>
       </Container>

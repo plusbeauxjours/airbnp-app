@@ -28,10 +28,10 @@ const SavedPresenter: React.FC<IProps> = ({ rooms }) => (
       contentContainerStyle={{ paddingBottom: 50 }}
     >
       {rooms.length !== 0 ? (
-        rooms.map((room) => (
+        rooms.map((room, index) => (
           <RoomCard
             isApi={false}
-            key={room.uuid}
+            key={index}
             uuid={room.uuid}
             name={room.name}
             price={room.price}

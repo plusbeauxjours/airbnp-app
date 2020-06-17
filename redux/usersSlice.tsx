@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import api from "../api";
 import { setFavs, setFav } from "./roomsSlice";
+import { AsyncStorage } from "react-native";
 
 const usersSlice = createSlice({
   name: "users",
@@ -16,10 +17,11 @@ const usersSlice = createSlice({
       state.token = action.payload.token;
       state.uuid = action.payload.uuid;
     },
-    logOut(state, action) {
+    logOut(state) {
       state.isLoggedIn = false;
       state.token = null;
       state.me = null;
+      state.uuid = null;
     },
     setMe(state, action) {
       state.me = action.payload.data;
@@ -44,6 +46,12 @@ export const userLogin = (form) => async (dispatch) => {
   } catch (e) {
     alert("Wrong user/password");
   }
+};
+
+export const userLogout = () => async (dispatch) => {
+  console.log("logout");
+  AsyncStorage.clear();
+  dispatch(logOut());
 };
 
 export const getFavs = () => async (dispatch, getState) => {

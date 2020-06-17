@@ -12,11 +12,12 @@ function formatQty(number: number, name: string) {
 }
 
 interface IProps {
-  uuid: string;
+  token: string;
   me: any;
+  userLogout: () => void;
 }
 
-const MyProfileContainer: React.FC<IProps> = ({ me, token }) => {
+const MyProfileContainer: React.FC<IProps> = ({ me, token, userLogout }) => {
   const navigation = useNavigation();
   const [rooms, setRooms] = useState<any>([]);
   const [roomLoading, setRoomsLoading] = useState<boolean>(false);
@@ -38,6 +39,7 @@ const MyProfileContainer: React.FC<IProps> = ({ me, token }) => {
 
   return (
     <MyProfilePresenter
+      userLogout={userLogout}
       formatQty={formatQty}
       me={me}
       roomLoading={roomLoading}

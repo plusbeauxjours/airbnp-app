@@ -134,7 +134,11 @@ const SearchPresenter: React.FC<IProps> = ({
           />
           <CancelContainer onPress={() => navigation.goBack()}>
             <Ionicons
-              name={utils.isAndroid() ? "md-backspace" : "ios-backspace"}
+              name={
+                utils.isAndroid()
+                  ? "md-close-circle-outline"
+                  : "ios-close-circle-outline"
+              }
               color="rgba(200, 200, 200, 0.8)"
               size={24}
             />
