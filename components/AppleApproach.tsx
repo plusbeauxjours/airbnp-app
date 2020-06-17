@@ -52,13 +52,13 @@ export default () => {
           last_name: credential.fullName.familyName,
           email: credential.email,
           username: credential.email,
-          appleId: credential.user,
+          apple_id: credential.user,
         });
         console.log(uuid, token);
         dispatch(appleLogin(uuid, token));
       }
     } catch (e) {
-      alert("Please LogIn later");
+      alert("Your Email is already taken. Please LogIn with Email.");
     } finally {
       setLoading(false);
     }

@@ -59,7 +59,6 @@ export const appleLogin = (uuid: string, token: string) => async (dispatch) => {
 };
 
 export const userLogout = () => async (dispatch) => {
-  console.log("logout");
   AsyncStorage.clear();
   dispatch(logOut());
 };
