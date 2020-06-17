@@ -54,7 +54,6 @@ export default () => {
           username: credential.email,
           apple_id: credential.user,
         });
-        console.log(uuid, token);
         dispatch(appleLogin(uuid, token));
       }
     } catch (e) {
