@@ -4,32 +4,27 @@
     "githubUrl": "https://github.com/plusbeauxjours/airbnp-app",
     "description": "Airbnb clone app",
     "slug": "airbnp-app",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "sdkVersion": "36.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "primaryColor": "#000000",
+    "primaryColor": "#353535",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#353535"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "airbnp.plusbeauxjours"
     },
     "android": {
-      "versionCode": 11,
+      "versionCode": 1,
       "package": "airbnp.plusbeauxjours"
     },
     "androidStatusBar": {
