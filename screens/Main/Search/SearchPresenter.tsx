@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import DismissKeyboard from "../../../components/DismissKeyboard";
 import RoomCard from "../../../components/RoomCard";
@@ -123,6 +123,7 @@ const SearchPresenter: React.FC<IProps> = ({
   formatQty,
 }) => (
   <DismissKeyboard>
+    <StatusBar barStyle="dark-content" />
     <>
       <Container>
         <SearchContainer>

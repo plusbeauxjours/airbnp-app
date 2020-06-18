@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar } from "react-native";
 import UserRooms from "../../../components/UserRooms";
 import { Ionicons } from "@expo/vector-icons";
 import utils from "../../../utils";
@@ -57,6 +57,7 @@ const LogoutContainer = styled.View`
 const Touchable = styled.TouchableOpacity``;
 export default ({ formatQty, roomLoading, me, rooms, userLogout }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
+    <StatusBar barStyle="dark-content" />
     <Header>
       <LogoutContainer>
         <Touchable onPress={userLogout}>

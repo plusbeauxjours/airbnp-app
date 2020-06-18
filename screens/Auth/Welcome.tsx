@@ -5,7 +5,7 @@ import { BlurView } from "expo-blur";
 import Btn from "../../components/Auth/Btn";
 import { useNavigation } from "@react-navigation/native";
 import AppleApproach from "../../components/AppleApproach";
-import { AppleLogin } from "../../redux/usersSlice";
+import utils from "../../utils";
 
 const LOGO_URL =
   "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png";
@@ -46,7 +46,7 @@ export default () => {
         <BtnContainer>
           <Btn onPress={goToSignUp} text={"SignUp"} accent={true} />
           <Btn onPress={goToSignIn} text={"SignIn"} color={"white"} />
-          <AppleApproach />
+          {!utils.isAndroid() ? <AppleApproach /> : null}
         </BtnContainer>
       </BlurView>
       <Image source={require("../../assets/loginBg.jpeg")} />

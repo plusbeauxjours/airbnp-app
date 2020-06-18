@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar } from "react-native";
 
 import RoomPhotos from "../../../components/RoomPhotos";
 import colors from "../../../colors";
@@ -130,6 +130,7 @@ export default ({
   getIconName,
 }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
+    <StatusBar barStyle="dark-content" />
     <IconTouchable
       onPress={() => {
         toggleFavs(roomObj.uuid, roomObj);
@@ -216,7 +217,7 @@ export default ({
           zoomEnabled={false}
           // scrollEnabled={false}
           style={{ height: "100%", width: "100%" }}
-          customMapStyle={mapStyle}
+          // customMapStyle={mapStyle}
         >
           <Marker
             coordinate={{

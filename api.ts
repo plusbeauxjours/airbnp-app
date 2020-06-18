@@ -5,7 +5,8 @@ const callApi = async (method: string, path: string, data?: any, jwt?: string, p
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json"
     };
-    const baseUrl = "http://localhost:8000/api/v1";
+    const baseUrl = "https://airbnp-api.herokuapp.com/api/v1";
+    // const baseUrl = "http://localhost:8000/api/v1";
     const fullUrl = `${baseUrl}${path}`;
     if (method === "get" || method === "delete") {
         return axios[method](fullUrl, { headers, params });

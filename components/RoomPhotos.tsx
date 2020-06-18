@@ -31,7 +31,7 @@ const RoomPhotos: React.FC<IProps> = ({ photos, factor = 4 }) => (
   <PhotoContainer factor={factor}>
     {photos.length === 0 ? (
       <SlideImage
-        resizeMode="repeat"
+        resizeMode="contain"
         source={require("../assets/roomDefault.jpeg")}
       />
     ) : (

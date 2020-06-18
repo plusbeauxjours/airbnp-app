@@ -105,7 +105,7 @@ interface ITheme {
 }
 
 export default ({ rooms }) => {
-  const mapRef = useRef();
+  const mapRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const navigation = useNavigation();
   const moveMap = () => {
@@ -144,7 +144,7 @@ export default ({ rooms }) => {
                 <RoomContainer>
                   {room.photos.length === 0 ? (
                     <SlideImage
-                      resizeMode="repeat"
+                      resizeMode="contain"
                       source={require("../assets/roomDefault.jpeg")}
                     />
                   ) : (
@@ -181,7 +181,7 @@ export default ({ rooms }) => {
               heading: 0,
               zoom: 10,
             }}
-            customMapStyle={mapStyle}
+            // customMapStyle={mapStyle}
             zoomEnabled={false}
             // scrollEnabled={false}
           >

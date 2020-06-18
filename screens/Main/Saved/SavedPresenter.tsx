@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import RoomCard from "../../../components/RoomCard";
+import { StatusBar } from "react-native";
 
 const Container = styled.View`
   margin-top: 70px;
@@ -22,6 +23,7 @@ interface IProps {
 
 const SavedPresenter: React.FC<IProps> = ({ rooms }) => (
   <Container>
+    <StatusBar barStyle="dark-content" />
     <Title>Favourites({rooms.length})</Title>
     <ScrollView
       showsVerticalScrollIndicator={false}

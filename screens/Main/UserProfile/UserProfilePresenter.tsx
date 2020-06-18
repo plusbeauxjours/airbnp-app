@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar } from "react-native";
 import UserRooms from "../../../components/UserRooms";
 
 const Header = styled.View`
@@ -48,6 +48,7 @@ const Row = styled.View`
 
 export default ({ formatQty, roomLoading, user, rooms }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }}>
+    <StatusBar barStyle="dark-content" />
     <Header>
       <Avatar
         source={

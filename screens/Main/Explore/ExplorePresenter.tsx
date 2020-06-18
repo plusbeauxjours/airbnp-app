@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import RoomCard from "../../../components/RoomCard";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const Container = styled.View`
@@ -16,7 +16,7 @@ const FakeBar = styled.View`
   width: 100%;
   background-color: white;
   box-shadow: 1px 5px 5px rgba(200, 200, 200, 0.5);
-  margin: 80px 0px 10px 0px;
+  margin: 40px 0px 10px 0px;
   border-radius: 7px;
   justify-content: center;
   padding-left: 10px;
@@ -56,6 +56,7 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => {
   const navigation = useNavigation();
   return (
     <Container>
+      <StatusBar barStyle="dark-content" />
       {rooms.length === 0 ? (
         <ActivityIndicator color="black" />
       ) : (
@@ -70,7 +71,6 @@ const ExplorePresenter: React.FC<IProps> = ({ rooms, increasePage }) => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{ width: "100%" }}
-            contentContainerStyle={{ paddingTop: 30 }}
           >
             {rooms.map((room, index) => (
               <RoomCard

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, StatusBar } from "react-native";
 import colors from "../../../colors";
 import { mapStyle } from "../../../mapStyle";
 
@@ -134,6 +134,7 @@ const MapPresenter: React.FC<IProps> = ({
   setCurrentIndex,
 }) => (
   <Container>
+    <StatusBar barStyle="dark-content" />
     <MapView
       // provider={PROVIDER_GOOGLE}
       ref={mapRef}
@@ -149,7 +150,7 @@ const MapPresenter: React.FC<IProps> = ({
         zoom: 10,
       }}
       onRegionChangeComplete={onRegionChangeComplete}
-      customMapStyle={mapStyle}
+      // customMapStyle={mapStyle}
     >
       {rooms?.map((room, index) => (
         <Marker

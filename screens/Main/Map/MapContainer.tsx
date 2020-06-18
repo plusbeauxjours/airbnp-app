@@ -5,7 +5,7 @@ import api from "../../../api";
 import { useNavigation } from "@react-navigation/native";
 
 export default ({ token }) => {
-  const mapRef = useRef();
+  const mapRef = useRef(null);
   const navigation = useNavigation();
   const { width } = Dimensions.get("screen");
   const [latitude, setLatitude] = useState<number>(40.766943);
