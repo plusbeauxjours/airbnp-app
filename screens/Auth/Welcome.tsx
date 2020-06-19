@@ -17,6 +17,8 @@ const Image = styled.Image`
   position: absolute;
   z-index: -1;
   top: 0;
+  width: 100%;
+  height: 100%;
 `;
 const Logo = styled.Image`
   width: 100px;
@@ -49,7 +51,7 @@ export default () => {
           {!utils.isAndroid() ? <AppleApproach /> : null}
         </BtnContainer>
       </BlurView>
-      <Image source={require("../../assets/loginBg.jpeg")} />
+      <Image source={require("../../assets/loginBg.jpeg")} resizeMode="cover" />
       <StatusBar barStyle="light-content" />
     </Container>
   );
