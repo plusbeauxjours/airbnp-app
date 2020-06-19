@@ -42,7 +42,7 @@ export default () => {
           justifyContent: "center",
         }}
       >
-        <Logo source={{ uri: LOGO_URL }} />
+        <Logo source={require("../../assets/welcomeIcon.png")} />
         <BtnContainer>
           <Btn onPress={goToSignUp} text={"SignUp"} accent={true} />
           <Btn onPress={goToSignIn} text={"SignIn"} color={"white"} />

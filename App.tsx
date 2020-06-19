@@ -30,6 +30,7 @@ export default function App() {
     const images = [
       require("./assets/loginBg.jpeg"),
       require("./assets/roomDefault.jpeg"),
+      require("./assets/welcomeIcon.png"),
       "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png",
     ];
     const fonts = [Ionicons.font];

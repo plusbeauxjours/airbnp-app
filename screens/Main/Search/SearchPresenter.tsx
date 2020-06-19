@@ -123,7 +123,6 @@ const SearchPresenter: React.FC<IProps> = ({
   formatQty,
 }) => (
   <DismissKeyboard>
-    <StatusBar barStyle="dark-content" />
     <>
       <Container>
         <SearchContainer>
