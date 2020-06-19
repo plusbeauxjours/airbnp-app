@@ -26,11 +26,17 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "airbnp.plusbeauxjours"
+      "bundleIdentifier": "airbnp.plusbeauxjours",
+      "usesAppleSignIn": true
     },
     "android": {
       "versionCode": 2,
-      "package": "airbnp.plusbeauxjours"
+      "package": "airbnp.plusbeauxjours",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDv66JZo6YNvVnnQu_x65TK_ik2EF_vCcQ"
+        }
+      }
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
