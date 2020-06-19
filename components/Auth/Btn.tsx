@@ -12,7 +12,7 @@ const Button = styled.View<ITheme>`
   padding: 13px 0px;
   align-items: center;
   width: 250px;
-  background-color: ${(props) => (props.accent ? "#35b8b3" : "transparent")};
+  background-color: ${(props) => (props.accent ? colors.red : "transparent")};
 `;
 
 const Text = styled.Text<ITheme>`

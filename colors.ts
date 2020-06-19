@@ -1,5 +1,5 @@
 export default {
-    red: "#FF5A5F",
+    red: "#35b8b3",
     black: "rgb(35, 35, 35)",
-    green: "#006a70"
+    green: "#b8d5cd"
 };
