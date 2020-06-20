@@ -46,6 +46,10 @@ export default function App() {
       require("./assets/welcomeIcon.png"),
       "http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png",
     ];
+    for (var i = 1; i < 51; i++) {
+      const url = `https://airbnp-app.s3.amazonaws.com/uploads/room_photos/${i}.jpeg`;
+      images.push(url);
+    }
     const fonts = [Ionicons.font];
     const imagePromises = cacheImages(images);
     const fontPromises = cacheFonts(fonts);
