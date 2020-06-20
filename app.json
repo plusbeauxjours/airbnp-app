@@ -1,15 +1,12 @@
 {
   "expo": {
-    "name": "airbnp-app",
+    "name": "awesomeBuenosAires",
     "githubUrl": "https://github.com/plusbeauxjours/airbnp-app",
     "description": "Airbnb clone app",
-    "slug": "airbnp-app",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "slug": "awesomeBuenosAires",
+    "platforms": ["ios", "android"],
     "sdkVersion": "36.0.0",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#353535",
@@ -21,17 +18,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "airbnp.plusbeauxjours",
+      "bundleIdentifier": "awesomeBuenosAires.plusbeauxjours",
       "usesAppleSignIn": true
     },
     "android": {
-      "versionCode": 2,
-      "package": "airbnp.plusbeauxjours",
+      "versionCode": 4,
+      "package": "awesomeBuenosAires.plusbeauxjours",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyDv66JZo6YNvVnnQu_x65TK_ik2EF_vCcQ"
