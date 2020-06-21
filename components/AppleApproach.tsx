@@ -10,7 +10,7 @@ import { appleLogin } from "../redux/usersSlice";
 const Touchable = styled.TouchableOpacity``;
 
 const LoginTextContainer = styled.View`
-  width: 130px;
+  width: 200px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -75,7 +75,7 @@ export default () => {
         ) : (
           <LoginTextContainer>
             <Ionicons name={"logo-apple"} size={25} color={"white"} />
-            <Text>Apple Login</Text>
+            <Text>Sign in with Apple</Text>
           </LoginTextContainer>
         )}
       </Button>

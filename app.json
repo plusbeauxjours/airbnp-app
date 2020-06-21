@@ -6,7 +6,7 @@
     "slug": "awesomeBuenosAires",
     "platforms": ["ios", "android"],
     "sdkVersion": "36.0.0",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#353535",
@@ -25,7 +25,7 @@
       "usesAppleSignIn": true
     },
     "android": {
-      "versionCode": 4,
+      "versionCode": 5,
       "package": "awesomeBuenosAires.plusbeauxjours",
       "config": {
         "googleMaps": {
