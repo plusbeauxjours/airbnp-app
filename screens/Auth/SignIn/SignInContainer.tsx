@@ -6,6 +6,7 @@ import SignInpresenter from "./SignInPresenter";
 
 export default ({ route: { params } }) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>(params?.email);
   const [password, setPassword] = useState<string>(params?.password);
   const isFormValid = () => {
@@ -20,18 +21,26 @@ export default ({ route: { params } }) => {
     return true;
   };
   const handleSubmit = () => {
-    if (!isFormValid()) {
-      return;
+    try {
+      setLoading(true);
+      if (!isFormValid()) {
+        return;
+      }
+      dispatch(
+        userLogin({
+          username: email,
+          password,
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
     }
-    dispatch(
-      userLogin({
-        username: email,
-        password,
-      })
-    );
   };
   return (
     <SignInpresenter
+      loading={loading}
       email={email}
       setEmail={setEmail}
       password={password}
