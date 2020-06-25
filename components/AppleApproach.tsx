@@ -44,18 +44,17 @@ export default () => {
           AppleAuthentication.AppleAuthenticationScope.EMAIL,
         ],
       });
-      if (credential) {
-        const {
-          data: { uuid, token },
-        } = await api.appleLogin({
-          first_name: credential.fullName.givenName,
-          last_name: credential.fullName.familyName,
-          email: credential.email,
-          username: credential.email,
-          apple_id: credential.user,
-        });
-        dispatch(appleLogin(uuid, token));
-      }
+      console.log(credential);
+      const {
+        data: { uuid, token },
+      } = await api.appleLogin({
+        first_name: credential?.fullName?.givenName,
+        last_name: credential?.fullName?.familyName,
+        email: credential?.email,
+        username: credential?.email,
+        apple_id: credential?.user,
+      });
+      dispatch(appleLogin(uuid, token));
     } catch (e) {
       alert("Your Email is already taken. Please LogIn with Email.");
     } finally {
