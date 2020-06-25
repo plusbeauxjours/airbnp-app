@@ -4,7 +4,10 @@
     "githubUrl": "https://github.com/plusbeauxjours/airbnp-app",
     "description": "Airbnb clone app",
     "slug": "awesomeBerlin",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "sdkVersion": "36.0.0",
     "version": "1.0.5",
     "orientation": "portrait",
@@ -18,7 +21,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "awesomeBerlin.plusbeauxjours",
