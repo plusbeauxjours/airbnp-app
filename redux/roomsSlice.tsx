@@ -37,7 +37,8 @@ const roomsSlice = createSlice({
           );
         } else {
           room.is_fav = true;
-          state.favs.push(room);
+          // state.favs.push(room);
+          [...state.favs, action.payload.room];
         }
       } else {
         const room = state.favs.find(
@@ -49,7 +50,8 @@ const roomsSlice = createSlice({
             (room) => room.uuid !== action.payload.roomUuid
           );
         } else {
-          state.favs.push(action.payload.roomObj);
+          // state.favs.push(action.payload.roomObj);
+          [...state.favs, action.payload.roomObj];
           const room = state.favs.find(
             (room) => room.uuid === action.payload.roomUuid
           );
