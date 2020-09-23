@@ -150,7 +150,6 @@ const MapPresenter: React.FC<IProps> = ({
         zoom: 10,
       }}
       onRegionChangeComplete={onRegionChangeComplete}
-      // customMapStyle={mapStyle}
     >
       {rooms?.map((room, index) => (
         <Marker

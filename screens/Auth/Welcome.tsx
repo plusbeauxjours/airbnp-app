@@ -20,6 +20,7 @@ const Image = styled.Image`
   width: 100%;
   height: 100%;
 `;
+
 const Logo = styled.Image`
   width: 100px;
   height: 100px;

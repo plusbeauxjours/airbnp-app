@@ -51,6 +51,7 @@ export default ({ token }) => {
         const {
           data: { results },
         } = await api.search(form, token);
+        console.log(results);
         setRooms(results);
       } catch (e) {
         console.warn(e);

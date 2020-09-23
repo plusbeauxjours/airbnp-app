@@ -168,7 +168,6 @@ export default ({ rooms }) => {
       <MapContainer>
         {rooms.length !== 0 && (
           <MapView
-            // provider={PROVIDER_GOOGLE}
             ref={mapRef}
             style={StyleSheet.absoluteFill}
             camera={{
@@ -181,9 +180,7 @@ export default ({ rooms }) => {
               heading: 0,
               zoom: 10,
             }}
-            // customMapStyle={mapStyle}
             zoomEnabled={false}
-            // scrollEnabled={false}
           >
             {rooms?.map((room, index) => (
               <Marker
