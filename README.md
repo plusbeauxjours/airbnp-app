@@ -1,7 +1,7 @@
 # AIRBNP-APP
 
 <p align="center" >
-  <img src="https://www.plusbeauxjours.com/static/media/Airbnp_app_video.d5ec5c1f.gif" >
+  <img src="https://github.com/plusbeauxjours/web-plusbeauxjours/blob/master/src/Images/App/Airbnp_app/Airbnp_app_video.gif" >
   <br>
 </p>
 
