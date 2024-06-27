@@ -1,4 +1,4 @@
-# AIRBNP-APP
+# STAYFINDER-APP
 
 <p align="center" >
   <img src="https://github.com/plusbeauxjours/web-plusbeauxjours/blob/master/src/Images/App/Airbnp_app/Airbnp_app_video.gif" >
@@ -15,7 +15,7 @@
 
 ### Portfolio Link
 
-> https://www.plusbeauxjours.info/projects/app/airbnp
+> https://www.plusbeauxjours.info/projects/0/app/stayfinder
 
 ### Download
 
